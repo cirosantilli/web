@@ -13,20 +13,24 @@
    }
   </style>
   <script src="assert.js"></script>
-  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-  <script src="/assets/jquery.toc.js"></script>
-  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-  <script>
-    $('#toc').toc({
-      content: 'div.content',
-      headings: 'h1,h2,h3,h4,h5,h6'
-    });
-  </script>
+
+  <!-- Not part of the cheat: only to improve usability. -->
+
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="jquery.toc.js"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+    <script>
+      $('#toc').toc({
+        content: 'div.content',
+        headings: 'h1,h2,h3,h4,h5,h6'
+      });
+    </script>
+    <link rel="stylesheet" href="/assets/header-link.css"/>
 </head>
 <body onload="document.getElementById('onload').innerHTML = 'onload'">
 <h1>JavaScript Cheatsheet</h1>
 
-<ul data-toc></ul>
+<ol data-toc></ol>
 
 <h2>About</h2>
 
@@ -114,7 +118,9 @@
       Possible to compile it down to vanilla JavaScript.
     </p>
 
-<h2>#Standards #ECMAScript</h2>
+<h2>#Standards</h2>
+
+<h2>#ECMAScript</h2>
 
   <p>Official language name: ECMA-262, or ECMAScript.</p>
   <p>Versions are often abbreviated as: ES5, ES6, etc.</p>
@@ -190,7 +196,7 @@
 
     <p>1999</p>
 
-<h2>#Detect #version</h2>
+<h2>#Detect JavaScript #version</h2>
 
   <p>Not possible?! <a href="http://stackoverflow.com/questions/7340726/detect-version-of-javascript">http://stackoverflow.com/questions/7340726/detect-version-of-javascript</a></p>
   <p>People recommend checking for individual features instead.</p>
@@ -405,7 +411,9 @@
       )
     </script>
 
-<h2>#semicolon #;</h2>
+<h2>#semicolon</h2>
+
+<h2>;</h2>
 
   <p>Separates statements.</p>
 
@@ -539,7 +547,9 @@
 
 <h2>#operators</h2>
 
-  <h3>#tilde operator #~</h3>
+  <h3>#tilde operator</h3>
+
+  <h3>#~</h3>
 
     <p>Binary negation.</p>
     <p>Common application: transform <code>-1</code> into <code>0</code> on <code>indexOf</code> (jQuery <code>inArray</code>).</p>
@@ -595,7 +605,11 @@
       //void a = 0
     </script>
 
-    <h4>#javascript: URI scheme #javascript:void(0); #javascript:;</h4>
+    <h4>#javascript: URI scheme</h4>
+
+    <h4>#javascript:void(0);</h4>
+
+    <h4>#javascript:;</h4>
 
       <p>
         Bad practice:
@@ -1530,7 +1544,13 @@
 
     <p>Not possible, unless derived from function.</p>
 
-  <h3>#getters #setters #__defineGetter__ #__defineSetter__</h3>
+  <h3>#getters</h3>
+
+  <h3>#setters</h3>
+
+  <h3>#__defineGetter__</h3>
+
+  <h3>#__defineSetter__</h3>
 
     <p>Allow property getting and assignment to do magic user define things.</p>
     <p>In literals with <code>get</code> and <code>set</code>:</p>
@@ -2451,7 +2471,9 @@
     assert_eq(a, 3)
   </script>
 
-  <h3>#modal #dialog</h3>
+  <h3>#modal</h3>
+
+  <h3>#dialog</h3>
 
     <p>In-window modals (popup that disables background).</p>
     <p>
@@ -2491,7 +2513,13 @@
       </p>
       <button onclick="window.alert('You said: ' + window.prompt('Enter a string.', 'Default value.'))" type="button">Open popup</button>
 
-  <h3>#height #width #innerHeight #outerHeight</h3>
+  <h3>#height</h3>
+
+  <h3>#width</h3>
+
+  <h3>#innerHeight</h3>
+
+  <h3>#outerHeight</h3>
 
     <p>Not on IE8.</p>
 
@@ -2507,7 +2535,13 @@
     <div><code>window.outerWidth</code> = </div>
     <script>previousElement().insertAdjacentHTML('beforeEnd', window.outerWidth)</script>
 
-  <h3>#scroll #pageXOffset #pageYOffset #scrollBy</h3>
+  <h3>#scroll</h3>
+
+  <h3>#pageXOffset</h3>
+
+  <h3>#pageYOffset</h3>
+
+  <h3>#scrollBy</h3>
 
     <p>Get how much scroll was done from top left:</p>
     <div>window.pageXOffset = </div>
@@ -2516,7 +2550,9 @@
     <script>previousElement().insertAdjacentHTML('beforeEnd', window.pageYOffset)</script>
     <p>scrollby: TODO window.scrollBy(100,100)</p>
 
-  <h3>#setInterval #clearInterval</h3>
+  <h3>#setInterval</h3>
+
+  <h3>#clearInterval</h3>
 
     <p>Run a function every n milliseconds.</p>
     <p>
@@ -2540,7 +2576,9 @@
       )
     </script>
 
-  <h3>#setTimeout #sleep</h3>
+  <h3>#setTimeout</h3>
+
+  <h3>#sleep</h3>
 
     <p>Callback once after given number of milliseconds.</p>
     <p>Not part of ES5, but Node.js also implements an identical interface.</p>
@@ -2623,12 +2661,16 @@
 
       <p>Same as <code>assign</code> but old URL does not get added to history.</p>
 
-    <h4>#href #redirect</h4>
+    <h4>#href</h4>
+
+    <h4>#redirect</h4>
 
       <p>For assignment, same as: <code>window.location.assign('url')</code>.</p>
       <p><button onclick="window.location.href='html2.html'" type="button">Redirect to html2.html!</button></p>
 
-    <h4>Get current URL #document.URL</h4>
+    <h4>#Get current URL</h4>
+
+    <h4>#document.URL</h4>
 
       <p><a href="http://stackoverflow.com/questions/1034621/get-current-url-with-javascript">http://stackoverflow.com/questions/1034621/get-current-url-with-javascript</a></p>
 
@@ -2828,7 +2870,9 @@
       Different from <code>Element</code>, which is a child class.
     </p>
 
-  <h3>#NodeList #HTMLCollection</h3>
+  <h3>#NodeList</h3>
+
+  <h3>#HTMLCollection</h3>
 
     <p><a href="http://www.w3.org/TR/dom/#nodelist">http://www.w3.org/TR/dom/#nodelist</a></p>
     <p>
@@ -2893,7 +2937,9 @@
         assert_eq(node.tagName, undefined)
       </script>
 
-  <h3>#nodeValue #innerHTML</h3>
+  <h3>#nodeValue</h3>
+
+  <h3>#innerHTML</h3>
 
     <p>
       *Don't* do <code>innerHTML += innerHTML + 'something'</code> unless you are sure it is only a string.
@@ -3010,7 +3056,15 @@
       assert_eq(strToElement('<div>a<i>b</i>c</div>').outerHTML, '<div>a<i>b</i>c</div>')
     </script>
 
-  <h3>#children #firstElementChild #childnodes #firstChild #lastChild</h3>
+  <h3>#children</h3>
+
+  <h3>#firstElementChild</h3>
+
+  <h3>#childnodes</h3>
+
+  <h3>#firstChild</h3>
+
+  <h3>#lastChild</h3>
 
     <p>Test preparation:</p>
     <script>
@@ -3032,7 +3086,15 @@
 
     <p>childNodes is of type NodeList. Therefore no forEach.</p>
 
-  <h3>#parentNode #nextSibling #nextElementSibling #previousSibling #previousElementSibling</h3>
+  <h3>#parentNode</h3>
+
+  <h3>#nextSibling</h3>
+
+  <h3>#nextElementSibling</h3>
+
+  <h3>#previousSibling</h3>
+
+  <h3>#previousElementSibling</h3>
 
     <script>
       var elem = strToElement('<div>a<i>b</i>c<i>d</i>e</div>')
@@ -3058,7 +3120,9 @@
         inner.insertAdjacentHTML('afterEnd',    ' <b>afterEnd</b> ')
       </script>
 
-    <h4>#insertBefore #appendChild</h4>
+    <h4>#insertBefore</h4>
+
+    <h4>#appendChild</h4>
 
       <p>Insert an element before another.</p>
       <p>Must work with elements: cannot insert string directly. Consider <code>insertAdjacentHTML</code> for that.</p>
@@ -3087,14 +3151,20 @@
         //element.parentNode.removeChild(element);
       </script>
 
-  <h3>#getAttribute #setAttribute #removeAttribute</h3>
+  <h3>#getAttribute</h3>
+
+  <h3>#setAttribute</h3>
+
+  <h3>#removeAttribute</h3>
 
     <p><code>setAttribute</code> creates the attribute if it does not exist.</p>
     <script>
       assert_eq(strToElement('<p id="getAttribute"></p>').getAttribute('id'), 'getAttribute')
     </script>
 
-  <h3>#style #CSS</h3>
+  <h3>#Style</h3>
+
+  <h3>#CSS</h3>
 
     <p>Get and set CSS attributes.</p>
     <script>
@@ -3102,7 +3172,9 @@
       document.getElementById('style').style.backgroundColor = 'red'
     </script>
 
-  <h3>#HTMLElement #elements</h3>
+  <h3>#HTMLElement</h3>
+
+  <h3>#elements</h3>
 
     <p>
       <code>HTMLElement</code> is the Base element class.
@@ -3166,7 +3238,11 @@
         Widely supported. TODO standards?
       </p>
 
-    <h4>#img #Image #HTMLImageElement</h4>
+    <h4>#img</h4>
+
+    <h4>#Image</h4>
+
+    <h4>#HTMLImageElement</h4>
 
       <h5>src</h5>
 
@@ -3217,7 +3293,9 @@
           since there is no analogous boolean <code>error</code> indicator.
         </p>
 
-    <h4>#textarea #input</h4>
+    <h4>#textarea</h4>
+
+    <h4>#input</h4>
 
       <p>Get or set the content with the <code>value</code> property.</p>
       <script>
@@ -3241,7 +3319,17 @@
         with this property).
       </p>
 
-      <h5>#keypress #keydown #keyup #textinput #change #input</h5>
+      <h5>#keypress</h5>
+
+      <h5>#keydown</h5>
+
+      <h5>#keyup</h5>
+
+      <h5>#textinput</h5>
+
+      <h5>#change</h5>
+
+      <h5>#input</h5>
 
         <p>Events that are activated when:</p>
         <ul>
@@ -3331,7 +3419,9 @@
     <p>Can be used together with <code>on</code> events. TODO check.</p>
     <p>TODO do all events have a on version and an <code>addEventListener</code> one?</p>
 
-    <h4>#useCapture parameter #capture vs #bubble</h4>
+    <h4>#useCapture parameter</h4>
+
+    <h4>#Capture vs #Bubble</h4>
 
       <p>Determines the order in which listeners listen to the event.</p>
       <p>TODO exactly how, example</p>
@@ -3346,7 +3436,9 @@
       <p>Only implemented in recent IE. Consider jQuery's <code>preventDefault</code> and/or <code>stopPropagation</code> if you care.</p>
       <p>TODO example</p>
 
-    <h4>#dispatchEvent #Trigger events programmatically.</h4>
+    <h4>#dispatchEvent</h4>
+
+    <h4>#Trigger events programmatically</h4>
 
       <p>
         Programmatically trigger events.
@@ -3568,7 +3660,9 @@
         <p>This still works on most browsers, but the W3C way of doing it is <code>preventDefault</code></p>
         <p>jQuery implements this interface on the callback passed to <code>on</code>.</p>
 
-    <h4>#submit event #submit() method</h4>
+    <h4>#submit event</h4>
+
+    <h4>#submit() method</h4>
 
       <p>
         Like click but when submitting a form through the submit button.
@@ -3926,7 +4020,9 @@
     <p>Allows full control over the HTTP headers.</p>
     <p>Many JS libraries add the following to the header:</p>
 
-  <h3>#response #onreadystatechange</h3>
+  <h3>#response</h3>
+
+  <h3>#onreadystatechange</h3>
 
     <p>Response should be used from a callback function on asynchronous mode.</p>
     <p><code>onreadystatechange</code> callback is called every time the <code>readyState</code> property changes.</p>
@@ -4071,7 +4167,9 @@
       </p>
       <p>On Firefox, <code>readyState</code> reaches 4, but <code>status</code> is 0.</p>
 
-    <h4>#CORS #cross-origin resource sharing</h4>
+    <h4>#CORS</h4>
+
+    <h4>#Cross-origin resource sharing</h4>
 
       <p>
         Jan 2014 W3C REC that enables cross origin XHR requests in a controlled manner.
@@ -4341,7 +4439,13 @@
     </p>
     <p>Great way to search for new libraries when you need to do something.</p>
 
-  <h3>#RequireJS #AMD #CommonJS #Browserify</h3>
+  <h3>#RequireJS</h3>
+
+  <h3>#AMD</h3>
+
+  <h3>#CommonJS</h3>
+
+  <h3>#Browserify</h3>
 
     <p><a href="http://stackoverflow.com/questions/16521471/relation-between-commonjs-amd-and-requirejs">http://stackoverflow.com/questions/16521471/relation-between-commonjs-amd-and-requirejs</a></p>
     <p>

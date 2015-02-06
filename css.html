@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8"/>
-  <title>CSS cheat</title>
+  <title>CSS Cheatsheet</title>
   <link rel="shortcut icon" type="image/x-icon" href="flower.jpg" />
 
   <!-- #External style -->
@@ -135,17 +135,8 @@
       @media (min-width: 1001px)                         { #media-width-rainbow { background-color: red; } }
   </style>
 
-  <!-- Not part of the cheat: only to improve usability. TODO factor out without breaking pre Jekyll HTLM -->
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="/assets/jquery.toc.js"></script>
-    <script>
-      $("#toc").toc({
-        content: "div.content",
-        headings: "h1,h2,h3,h4,h5,h6"
-      });
-    </script>
-
   <!-- #triangle -->
+
     <style>
       div.triangle-up {
         width: 0;
@@ -157,12 +148,24 @@
         line-height: 0;
       }
     </style>
+
+  <!-- Not part of the cheat: only to improve usability. -->
+
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="jquery.toc.js"></script>
+    <script>
+      $("#toc").toc({
+        content: "div.content",
+        headings: "h1,h2,h3,h4,h5,h6"
+      });
+    </script>
+    <link rel="stylesheet" href="/assets/header-link.css"/>
 </head>
 <body>
 
 <h1>CSS Cheatsheet</h1>
 
-<ul data-toc></ul>
+<ol data-toc></ol>
 
 <h2>#Standards</h2>
 
@@ -195,7 +198,7 @@
     <li>
       <a href="http://www.w3.org/TR/css3-selectors/">http://www.w3.org/TR/css3-selectors/</a>.
       Selectors 3 REC: how to select specific elements.
-      Also important for Javascript DOM manipulation.
+      Also important for JavaScript DOM manipulation.
       Level 4 WD: <a href="http://www.w3.org/TR/selectors4/">http://www.w3.org/TR/selectors4/</a>
     </li>
     <li>
@@ -217,7 +220,9 @@
 
   <p>Validator:<a href="http://www.css-validator.org/#validate_by_input">http://www.css-validator.org/#validate_by_input</a></p>
 
-  <h3>#XML #SVG</h3>
+  <h3>#XML</h3>
+
+  <h3>#SVG</h3>
 
     <p>CSS can be used to style arbitrary XML documents in addition to HTML, including SVG.</p>
     <p>Like in HTML, this can be done through external, embedded or inline styles.</p>
@@ -315,7 +320,9 @@
       </div>
       <p>You cannot include an external sheet directly with this, but you can do it with </p>
 
-<h2>#Precedence #Specificity</h2>
+<h2>#Precedence</h2>
+
+<h2>#Specificity</h2>
 
   <p>This describes how user agents should decide the value of a property when multiple values may apply.</p>
   <p>First read this <a href="http://css-tricks.com/specifics-on-css-specificity/">good tutorial</a> to get the general idea.</p>
@@ -360,7 +367,7 @@
     More on specificity below.
 
   - Finally, sort by order specified:if two declarations have the same weight, origin and specificity, the latter specified wins.
-    Declarations in imported style sheets are considered to be before any declarations in the style sheet itself. 
+    Declarations in imported style sheets are considered to be before any declarations in the style sheet itself.
 
   #specificity
 
@@ -392,7 +399,11 @@
 
   <p><code>a &gt; b</code>:<code>b</code> is a child of <code>a</code></p>
 
-  <h3>#+ #plus #next sibling</h3>
+  <h3>#+</h3>
+
+  <h3>#plus</h3>
+
+  <h3>#next sibling</h3>
 
     <p>
       First next sibling.
@@ -403,7 +414,11 @@
       <span class="border plus1">1</span>
     </p>
 
-  <h3>#~ #tilde #any sibling</h3>
+  <h3>#~</h3>
+
+  <h3>#tilde</h3>
+
+  <h3>#any sibling</h3>
 
     <p>
       Every next sibling
@@ -426,20 +441,30 @@
       meaning that browsers may have to render an element twice.
     </p>
 
-  <h3>#, #comma</h3>
+  <h3>#,</h3>
+
+  <h3>#comma</h3>
 
     <p>
       Has very low precedence. It is necessary to repeat both sides fully.
       Only current solution are SASS-like languages.
     </p>
 
-  <h3>#star #asterisk #*</h3>
+  <h3>#star</h3>
+
+  <h3>#asterisk</h3>
+
+  <h3>#*</h3>
 
     <p>Any element. Generally bad idea since too general.</p>
     <p><code>a *</code>: any descendant of <code>a</code></p>
     <p><code>a * b</code>:<code>b</code> that is a descendant of <code>a</code> of level 2 or more</p>
 
-  <h3>#[] #square brackets #attribute selector</h3>
+  <h3>#[]</h3>
+
+  <h3>#square brackets</h3>
+
+  <h3>#attribute selector</h3>
 
     <p>Family of attribute based selectors:</p>
 
@@ -604,7 +629,11 @@
 
       <p>Major application: making modals</p>
 
-    <h4>select by #content #contains</h4>
+    <h4>select by</h4>
+
+    <h4>#content</h4>
+
+    <h4>#contains</h4>
 
       <p>
         As of CSS3 it is not possible to select by content:
@@ -634,7 +663,7 @@
         meaning that browsers may have to render an element twice.
       </p>
 
-    <h4>Select #arbitrary elements when something happens</h4>
+    <h4>Select arbitrary elements when something happens</h4>
 
       <p>
         No, it is not possible, only elements that have a direct child / sibling
@@ -829,7 +858,9 @@
 
     <p>Good way to DRY things out in pure CSS.</p>
 
-  <h3>#text #font properties</h3>
+  <h3>#text</h3>
+
+  <h3>#font properties</h3>
 
     <p>First understand some font parameters:</p>
 
@@ -1067,7 +1098,9 @@ a
 
       <p>Default value: 8.</p>
 
-    <h4>#white-space-collapse #bikeshedding</h4>
+    <h4>#white-space-collapse</h4>
+
+    <h4>#bikeshedding</h4>
 
       <p>TODO</p>
 
@@ -1157,7 +1190,11 @@ a
       <p>Linear red blue:<span style="display:inline-block; width:50px; height:50px; background:linear-gradient(red, blue);"></span></p>
       <p>Linear to left top red blue:<span style="display:inline-block; width:50px; height:50px; background:linear-gradient(to left top, red, blue);"></span> </p>
 
-  <h3>#content #before #after</h3>
+  <h3>#content</h3>
+
+  <h3>#before</h3>
+
+  <h3>#after</h3>
 
     <p>Modifies tag content.</p>
     <p>
@@ -1269,7 +1306,9 @@ a
           border:10px solid black; outline:10px solid blue; outline-offset:10px;
         </div>
 
-  <h3>#width #height</h3>
+  <h3>#width</h3>
+
+  <h3>#height</h3>
 
     <div class="border">
       <div class="border" style="height:50px; width:50px; padding-top:25px;">
@@ -1756,7 +1795,9 @@ a
 
     <p>Good tutorial: <a href="http://www.barelyfitz.com/screencast/html-training/css/positioning/">http://www.barelyfitz.com/screencast/html-training/css/positioning/</a></p>
 
-    <h4>#relative #absolute</h4>
+    <h4>#Relative positioning</h4>
+
+    <h4>#Absolute positioning</h4>
 
       <p>
         Object is moved to a new location relative to the first non static positioned parent,
@@ -1851,7 +1892,13 @@ a
         <div class="border" style="display:inline-block; width:200px; position:absolute; right:100%;">with fixed width</div>
       </div>
 
-    <h4>#bottom #top #left #right</h4>
+    <h4>#bottom</h4>
+
+    <h4>#top</h4>
+
+    <h4>#left</h4>
+
+    <h4>#right</h4>
 
       <p>
         Specify absolute position inside it's relative element,
@@ -1961,7 +2008,7 @@ a
       and / or because they are reused from the user's desktop.
     </p>
 
-  <h3>#html element vs #body</h3>
+  <h3>#html element vs body</h3>
 
     <p>TODO</p>
 
@@ -2071,7 +2118,11 @@ a
           <a href="http://css-tricks.com/textarea-tricks/">http://css-tricks.com/textarea-tricks/</a>
         </p>
 
-      <h5>Style the textarea #grabber #handle</h5>
+      <h5>Style the textare</h5>a
+
+      <h5>#grabber</h5>
+
+      <h5>#handle</h5>
 
         <p>
           Not standard possible:
@@ -2085,7 +2136,9 @@ a
         <a href="https://mdn.mozillademos.org/files/4563/editable_select.html">https://mdn.mozillademos.org/files/4563/editable_select.html</a>
       </p>
 
-    <h4>#checkbox #radio</h4>
+    <h4>#checkb</h4>ox
+
+    <h4>#radio</h4>
 
       <p>It is not currently easy to style those elements.</p>
       <p>It is not easy either to explain why they have a given size.

@@ -10,8 +10,7 @@ Bower was created by Twitter and open sourced.
 
 Bower is similar to Ruby Bundler and Node NPM, but it is specialized for web front end files.
 
-Bower downloads the desired version of packages into the current project tree,
-where they can be linked from `script` or `style` tags.
+Bower downloads the desired version of packages into the current project tree, where they can be linked from `script` or `style` tags.
 
 Sample directory structure:
 
@@ -25,9 +24,7 @@ Sample directory structure:
 
 TODO: why not use Git submodules instead?
 
-In most cases, it is possible to package Javascript both with NPM and Bower.
-The main difference is that Bower is focused on front-end, and can also handle HTML and CSS,
-while NPM deals only with backend Javascript.
+In most cases, it is possible to package JavaScript both with NPM and Bower. The main difference is that Bower is focused on front-end, and can also handle HTML and CSS, while NPM deals only with backend JavaScript.
 
 Install:
 
@@ -47,16 +44,12 @@ Install packages in `bower.json`:
 
 Configuration file: `bower.json`. Used to be called `components.json`.
 
-# Create a package
+## Create a package
 
 Bower integrates tightly with Git.
 
 You must Git version control you package.
 
-Only Git tracked files can be published:
-<http://stackoverflow.com/questions/19029726/dealing-with-git-generated-files-and-bower>
-This means that you have to Git track output files like compiled CoffeeScript ...
+Only Git tracked files can be published: <http://stackoverflow.com/questions/19029726/dealing-with-git-generated-files-and-bower> This means that you have to Git track output files like compiled CoffeeScript ...
 
-Some programmers favor tracking even `bower_components` in case GitHub is down
-or dependencies become unavailable.
-<http://stackoverflow.com/questions/22327758/should-bower-components-be-gitignored>
+Some programmers favor tracking even `bower_components` in case GitHub is down or dependencies become unavailable. <http://stackoverflow.com/questions/22327758/should-bower-components-be-gitignored>

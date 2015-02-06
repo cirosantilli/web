@@ -16,27 +16,11 @@
     <!--<meta name="custom-name" content="custom-content" />-->
 
     <meta property="custom-property" content="custom-content" />
-    <meta id="meta-id" content="meta-id-content" />
 
   <!-- #link -->
 
     <link rel="shortcut icon" type="image/x-icon" href="flower.jpg" />
     <!--<link rel="custom-rel" type="custom-type" href="flower.jpg" />-->
-
-  <!-- Not part of the cheat: only to improve usability. TODO factor out without breaking pre Jekyll HTLM -->
-
-    <style>
-      .border { border:1px solid black; }
-    </style>
-
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="/assets/jquery.toc.js"></script>
-    <script>
-      $("#toc").toc({
-        content: "div.content",
-        headings: "h1,h2,h3,h4,h5,h6"
-      });
-    </script>
 
   <!-- SVG style -->
 
@@ -44,6 +28,25 @@
       svg circle.circle { fill:green; }
       svg circle.circle:hover { fill:yellow; }
     </style>
+
+    <!-- Not part of the cheat: only to improve usability. -->
+
+    <style>
+      .td-border td {
+        border: 1px solid black;
+      }
+    </style>
+
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="/assets/main.js"></script>
+    <script src="jquery.toc.js"></script>
+    <script>
+      $("#toc").toc({
+        content: "div.content",
+        headings: "h1,h2,h3,h4,h5,h6"
+      });
+    </script>
+    <link rel="stylesheet" href="/assets/header-link.css"/>
 </head>
 <body>
 <h1>#HTML Cheatsheet</h1>
@@ -87,7 +90,8 @@ This seems not to be possible because of the cross site request:
 <div style="float:right;">
   <p>
     Validation of <b>live</b> site (<b>not</b> localhost one).
-    As of 25 Jan 2015, 6 errors are SVG validator bugs.<br/>
+    6 errors are SVG validator bugs.
+  <br/>
   </p>
   <iframe src="http://validator.w3.org/check?uri=http%3A%2F%2Fcirosantilli.github.io%2Fweb%2Fhtml.html"
       style="width:600px; height:600px;"></iframe>
@@ -98,7 +102,7 @@ This seems not to be possible because of the cross site request:
 </p>
 <p>Considers both W3C standards and browser support.</p>
 
-<ul data-toc></ul>
+<ol data-toc></ol>
 
 <h2>#Standards</h2>
 
@@ -130,7 +134,9 @@ This seems not to be possible because of the cross site request:
     </p>
     <p>HTML5 is not SGML, but it was influenced by it. HTML 4 is SGML.</p>
 
-  <h3>#XHTML5 #XML</h3>
+  <h3>#XHTML5</h3>
+
+  <h3>#XML</h3>
 
     <p>XHTML5 is a strictly XML version of HTML5.</p>
     <p>The standard is developed together with HTML5.</p>
@@ -230,7 +236,7 @@ This seems not to be possible because of the cross site request:
 
     <p>Firefox has the built-in Web developers tool which is quite good. Shortcut: Ctrl + I.</p>
     <p>
-      It also has the popular third party #Bugzilla tool. Bugzilla was more popular in the past when the built-in tool was worse,
+      It also has the popular third party Bugzilla tool. Bugzilla was more popular in the past when the built-in tool was worse,
       now using just the built-in tool should be enough
     </p>
     <p>
@@ -242,7 +248,13 @@ This seems not to be possible because of the cross site request:
 
   <p>http://www.w3.org/TR/html5/syntax.html</p>
 
-  <h3>#element vs #tag #start tag #end tag</h3>
+  <h3>#element vs</h3>
+
+  <h3>#tag</h3>
+
+  <h3>#start tag</h3>
+
+  <h3>#end tag</h3>
 
     <p><code>&lt;p&gt;a&lt;/p&gt;</code> is an element</p>
     <p>
@@ -300,7 +312,9 @@ This seems not to be possible because of the cross site request:
       </li>
     </ul>
 
-  <h3>#Optional tags #omit tags</h3>
+    <h3>#Optional tags</h3>
+
+    <h3>#omit tags</h3>
 
     <ul>
       <li>
@@ -388,7 +402,8 @@ This seems not to be possible because of the cross site request:
         </p>
       </li>
       <li>
-        numeric: refers to Unicode code points. Starts with the number sign <code>#</code>.
+        Numeric: refers to Unicode code points, <b>not</b> UTF-8 or the current encoding.
+        Starts with the number sign <code>#</code>.
         <ul>
           <li>decimal: &amp;#60;  &#60;</li>
           <li>hex:     &amp;#x3C; &#x3C;</li>
@@ -572,7 +587,7 @@ This seems not to be possible because of the cross site request:
       <p>Allows to add arbitrary metadata do a document.</p>
       <p>TODO: vs meta?</p>
 
-  <h3>#IDL attribute vs #content attribute</h3>
+  <h3>#IDL attribute vs content attribute</h3>
 
     <p>
       Not content attributes that are written in HTML tags,
@@ -744,7 +759,13 @@ This seems not to be possible because of the cross site request:
     <li>div is and can contain flow content elements</li>
   </ul>
 
-  <h3>#block-level #inline #inline-block #replaced</h3>
+  <h3>#block-level</h3>
+
+  <h3>#inline</h3>
+
+  <h3>#inline-block</h3>
+
+  <h3>#replaced</h3>
 
     <p>
       HTML4 uses terms block-level, inline and inline-block. In most senses, all elements are either block-level or inline.
@@ -907,7 +928,11 @@ a
     <li>before<sub>#sub</sub>. Subscript.</li>
   </ul>
 
-  <h3>#ruby #rp #rt</h3>
+  <h3>#ruby</h3>
+
+  <h3>#rp</h3>
+
+  <h3>#rt</h3>
 
     <p>HTML5</p>
     <p>
@@ -991,7 +1016,9 @@ b</code></pre>
     so don't do it unless the page entire page can be cached and you won't be reusing the element across pages.
   </p>
 
-  <h3>#img #images</h3>
+  <h3>#img</h3>
+
+  <h3>#images</h3>
 
     <p>img elements are neither inline nor block: they are replaced inline elements.
 
@@ -1106,7 +1133,9 @@ b</code></pre>
       <a href="http://www.html5rocks.com/en/tutorials/webaudio/intro/">Audio API</a>.
     </p>
 
-  <h3>#frame #iframe</h3>
+  <h3>#frame</h3>
+
+  <h3>#iframe</h3>
 
     <p>Include another HTML document in the current one.</p>
     <p>
@@ -1154,7 +1183,9 @@ b</code></pre>
     <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed</a></p>
     <p>Standardized in HTML5, but had wide incompatible supports before.</p>
 
-  <h3>#MathML #math element</h3>
+  <h3>#MathML</h3>
+
+  <h3>#math element</h3>
 
     <p>Standard way to represent mathematics.</p>
     <p>XML like language not suitable for direct user input, not LaTeX.</p>
@@ -1428,7 +1459,11 @@ b</code></pre>
     </tr>
   </table>
 
-  <h3>#thead, #tbody and #tfoot</h3>
+  <h3>#thead</h3>
+
+  <h3>#tbody</h3>
+
+  <h3>#tfoot</h3>
 
     <p>
       <code>thead</code> must come *before* <code>tbody</code> and <code>tfoot</code> in valid HTML,
@@ -1468,6 +1503,41 @@ b</code></pre>
         handle any more complex case explicitly with multiple <code>tbody</code> elements.
       </p>
       <p>There can be multiple <code>tbody</code> elements on a single table.</p>
+      <p>Header with th:</p>
+
+    <h4>#rowspan</h4>
+
+    <h4>#colspan</h4>
+
+      <p>Merge table cells.</p>
+
+      <table class="td-border">
+        <tr>
+          <td>0</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td colspan="2">2</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>5</td>
+        </tr>
+      </table>
+
+      <table class="td-border">
+        <tr>
+          <td>0</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td rowspan="2">2</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>5</td>
+        </tr>
+      </table>
 
   <h3>#group rows</h3>
 
@@ -1837,7 +1907,9 @@ b</code></pre>
         <input type="submit" value="type=submit"/>
       </form>
 
-    <h4>#datalist #list</h4>
+    <h4>#datalist</h4>
+
+    <h4>#list</h4>
 
       <p>
         Suggest autocomplete data from fixed data set to text field.
@@ -1848,9 +1920,9 @@ b</code></pre>
       <form action="#datalist" id="datalist">
         <input list="datalist-id" name="name">
         <datalist id="datalist-id">
-          <option value="abcdef">
-          <option value="defghi">
-          <option value="ghijkl">
+          <option value="abc">abc</option>
+          <option value="def">def</option>
+          <option value="ghi">ghi</option>
         </datalist>
         <button type="submit">Submit</button>
       </form>
@@ -1890,7 +1962,9 @@ b</code></pre>
     <p>Large box for inputting text.</p>
     <p><textarea>default</textarea></p>
 
-    <h4>#rows #cols</h4>
+    <h4>#rows</h4>
+
+    <h4>#cols</h4>
 
       <p>
         How many chars will fit into the <code>textarea</code>
@@ -1979,7 +2053,11 @@ iii</textarea></p>
         <li><a href="https://github.com/blueimp/jQuery-File-Upload">https://github.com/blueimp/jQuery-File-Upload</a></li>
       </ul>
 
-  <h3>#select #option #dropdown select</h3>
+  <h3>#select</h3>
+
+  <h3>#option</h3>
+
+  <h3>#dropdown select</h3>
 
     <p>
       The boolean attribute <code>selected</code> marks the default.
@@ -2111,7 +2189,13 @@ iii</textarea></p>
 
       <p>There are several time validators: month, week, etc.</p>
 
-  <h3>#number type #min #max #step</h3>
+  <h3>#number type</h3>
+
+  <h3>#min</h3>
+
+  <h3>#max</h3>
+
+  <h3>#step</h3>
 
     <p>Effects;</p>
     <ul>
@@ -2188,7 +2272,9 @@ iii</textarea></p>
       dedicated demo at: <a href="autofocus.html">autofocus.html</a>
     </p>
 
-  <h3>#autocapitalize #autocorrect</h3>
+  <h3>#autocapitalize</h3>
+
+  <h3>#autocorrect</h3>
 
     <p>
       Not in HTML5:
@@ -2339,7 +2425,13 @@ iii</textarea></p>
 
   <h3>#accesskey</h3>
 
-  <h3>#Drag and drop #Draggable attribute #DnD</h3>
+    <p>TODO</p>
+
+  <h3>#Drag and drop</h3>
+
+  <h3>#Draggable attribute</h3>
+
+  <h3>#DnD</h3>
 
     <p>
       HTML5 adds built-in drag-and-drop DnD support complete with a Javascript API.
