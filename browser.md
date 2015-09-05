@@ -48,6 +48,8 @@ Useful `about:config` options:
 
 Disable `Ctrl + Q` from closing the app: <http://askubuntu.com/questions/10880/disable-ctrlq-in-firefox-without-keyconfig-extension> Only seems possible with extensions. There is an extension just to do it: <https://addons.mozilla.org/en-US/firefox/addon/disable-ctrl-q-shortcut/>
 
+Enable spell check in `input text` fields (by default only on `textarea`):
+
 #### Developer tools
 
 ##### Tamper data

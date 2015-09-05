@@ -11,7 +11,7 @@ HTML, CSS, JavaScript and related technologies.
 1.  [Standards](standards)
 1.  [ACE](ace.html)
 1.  [PDF.js](pdfjs.html)
-1.  [Marked Markdown browser example](marked.html)
+1.  [Marked](marked.html)
 1.  [Bower](bower/)
 1.  [Browserify](browserify)
 1.  [Bootstrap](bootstrap.html)

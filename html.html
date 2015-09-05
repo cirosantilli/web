@@ -32,6 +32,7 @@
     <!-- Not part of the cheat: only to improve usability. -->
 
     <style>
+      .border { border: 1px solid black; }
       .td-border td {
         border: 1px solid black;
       }
@@ -402,12 +403,32 @@ This seems not to be possible because of the cross site request:
         </p>
       </li>
       <li>
-        Numeric: refers to Unicode code points, <b>not</b> UTF-8 or the current encoding.
-        Starts with the number sign <code>#</code>.
+        <p>
+          Numeric: refers to Unicode code points, <b>not</b> UTF-8 or the current encoding.
+          Each reference contains the entire Unicode point.
+          Starts with the number sign <code>#</code>.
+        </p>
         <ul>
           <li>decimal: &amp;#60;  &#60;</li>
-          <li>hex:     &amp;#x3C; &#x3C;</li>
+          <li>hex: &amp;#x3C; &#x3C;</li>
+          <li>hex with 2 bytes: Euro sign: &amp;#x20AC; &#x20AC;</li>
         </ul>
+        <p>
+          Not all numbers are valid! The following are explicitly disallowed:
+          U+0000, U+000D, permanently undefined Unicode characters (noncharacters),
+          surrogates (U+D800–U+DFFF), and control characters other than space characters.
+        </p>
+        <p>It seems that XML has similar restrictions. TODO check.</p>
+        <p>
+          This is not so surprising, considering that HTML should treat references
+          almost exactly as if they were characters, so if the raw characters are not allowed,
+          the corresponding references should not be allowed either.
+        </p>
+        <p>
+          Commented out invalid examples:
+          Control:
+          <!-- &#01; -->
+        </p>
       </li>
     </ul>
 
@@ -861,26 +882,40 @@ This seems not to be possible because of the cross site request:
   <pre class="border">a
  b</pre>
 
-  <p>Newline before and after:</p>
-  <pre class="border">
+  <h3>Trailing whitespace up to the first newline is ignored</h3>
+
+    <p>Newline before and after:</p>
+    <pre class="border">
 a
  b
-  </pre>
+</pre>
 
-  <p>Whitespace newline before and after:</p>
-  <pre class="border"> 
+    <p>Two newlines before and after:</p>
+    <pre class="border">
+
+a
+ b
+
+</pre>
+
+    <p>Whitespace newline before and after:</p>
+    <pre class="border"> 
 a
  b
  </pre>
 
-  <div>Span newline before and after:</div>
-  <pre class="border"><span>
+    <div>Span newline before and after:</div>
+    <pre class="border"><span>
 a
  b
 </span></pre>
-  <div>You cannot put HTML4 block-level elements such as <code>p</code> inside <code>pre</code> (another block level element)</div>
 
-  <div>2 Newlines before and after:</div>
+  <p>
+    You cannot put HTML4 block-level elements such as <code>p</code>
+    inside <code>pre</code> (another block level element)
+  </p>
+
+  <p>2 Newlines before and after:</p>
   <pre class="border">
 
 a
@@ -2412,7 +2447,7 @@ iii</textarea></p>
       If true, you can edit the content of the element like for a textarea.
       Tab cycles through such elements.
     </p>
-    <p class="border" contenteditable="true">p contenteditable=true</p>
+    <p class="border" style="height:50px" contenteditable="true">p contenteditable=true</p>
     <p class="border" contenteditable="false">p contenteditable=false</p>
 
   <h3>#designMode</h3>

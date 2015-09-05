@@ -720,7 +720,7 @@
     }
     assert_eq(total, 3)
 
-  // For in: iterates over **object properties**!
+  // For in: iterates over **enumerable object properties**!
 
     var total = 0
     var obj = {'a': 1, 'b': 2}
@@ -728,6 +728,15 @@
       total += obj[x]
     }
     assert_eq(total, 3)
+
+  // Includes the prototype chain!
+
+    var total = 0
+    var obj = Object.create({parent: 1})
+    for (var x in obj) {
+      total += obj[x]
+    }
+    assert_eq(total, 1)
 
 // #continue
 
@@ -2308,9 +2317,11 @@
       assert_eq(a[1], 1)
       assert_eq(a.length, 2)
 
-  // #iterate #forEach
+  // #iterate
 
-    // for in iterates all properties of an object, so it does *not* work!
+  //# forEach
+
+    // For in iterates all properties of an object, so it does *not* work!
 
     // Use either explicit index or forEach method for arrays.
 
