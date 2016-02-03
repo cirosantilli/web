@@ -1,6 +1,6 @@
 ---
 title: Chrome
-permalink: chrome/
+permalink: web/chrome/
 ---
 
 Some websites run neither on Firefox nor Chromium, only Chrome.

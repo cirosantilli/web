@@ -1,6 +1,6 @@
 ---
 title: Firefox
-permalink: firefox/
+permalink: web/firefox/
 ---
 
 ## Trouble shooting

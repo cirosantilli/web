@@ -1,6 +1,6 @@
 ---
 title: Bibliography
-permalink: bibliography/
+permalink: web/bibliography/
 ---
 
 Non standard sources

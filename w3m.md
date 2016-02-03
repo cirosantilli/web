@@ -1,6 +1,6 @@
 ---
 title: w3m
-permalink: w3m/
+permalink: web/w3m/
 ---
 
 ncurses web browser!
