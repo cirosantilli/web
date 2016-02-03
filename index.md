@@ -8,15 +8,19 @@ HTML, CSS, JavaScript and related technologies.
     1. [HTML](html.html)
     1. [CSS](css.html)
     1. [JavaScript](js.html)
-1.  [Standards](standards)
+1.  [Standards](standards/)
 1.  [ACE](ace.html)
 1.  [PDF.js](pdfjs.html)
 1.  [Marked](marked.html)
 1.  [Bower](bower/)
-1.  [Browserify](browserify)
+1.  [Browserify](browserify/)
 1.  [Bootstrap](bootstrap.html)
 1.  [jQuery](jquery.html)
 1.  [jsPDF](jspdf.html)
+1.  Browsers
+    1. [Firefox](firefox)
+    1. [Chrome](chrome)
+    1. [w3m](w3m)
 1.  [Bibliography](bibliography)
 
 Related repositories:

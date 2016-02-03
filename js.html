@@ -642,122 +642,165 @@
       <div><a href="#">#</a></div>
       <div><a href="javascript:;">javascript:;</a></div>
       <div><a href="javascript:">javascript:</a></div>
+
+    <h4>#=</h4>
+
+    <h4>#Assignment operator</h4>
+
+      <p>Variables contain address of data.</p>
+      <p><code>=</code> always takes the address of the data on the right and sets it to the variable on the left.</p>
+      <p>Integers like `0` and `1` *do* have a single (because immutable) address in JavaScript.</p>
+
+      <script>
+        var a = 0
+        var b = a
+        b = 1
+        assert_eq(a, 0)
+
+        var a = [0]
+        var b = a
+        b[0] = 1
+        assert_eq(a[0], 1)
+
+        var a = [[0]]
+        var b = a
+        b[0][0] = 1
+        assert_eq(a[0][0], 1)
+      </script>
+
 <script>
-// TODO: convert comments on this script to HTML
 
-// #if
+// #branching
 
-  // http://www.ecma-international.org/ecma-262/5.1/#sec-12.5
+  // #if
 
-    if (false) {
-      assert(false)
-    } else {
+    // http://www.ecma-international.org/ecma-262/5.1/#sec-12.5
+
+      if (false) {
+        assert(false)
+      } else {
+      }
+
+      if (true) {
+      } else {
+        assert(false)
+      }
+
+    // Like Python, some objects are converted to true, others to false.
+
+    // Only the following are false:
+
+      if (0) {
+        assert(false)
+      } else {
+      }
+
+      if ("") {
+        assert(false)
+      } else {
+      }
+
+      if (null) {
+        assert(false)
+      } else {
+      }
+
+      if (undefined) {
+        assert(false)
+      } else {
+      }
+
+      if (NaN) {
+        assert(false)
+      } else {
+      }
+
+    // All others are true.
+
+      if (-1) {
+      } else {
+        assert(false)
+      }
+
+      if (1) {
+      } else {
+        assert(false)
+      }
+
+      if ("a") {
+      } else {
+        assert(false)
+      }
+
+      if ([]) {
+      } else {
+        assert(false)
+      }
+
+  // #for
+
+    // C like:
+
+      var total = 0
+      for (var i = 0; i < 3; i++) {
+        total += i
+      }
+      assert_eq(total, 3)
+
+    // For in: iterates over **enumerable object properties**!
+
+      var total = 0
+      var obj = {'a': 1, 'b': 2}
+      for (var x in obj) {
+        total += obj[x]
+      }
+      assert_eq(total, 3)
+
+    // Includes the prototype chain!
+
+      var total = 0
+      var obj = Object.create({parent: 1})
+      for (var x in obj) {
+        total += obj[x]
+      }
+      assert_eq(total, 1)
+
+  // #continue
+
+  // #break
+
+    // Both have a label and label-less form.
+
+    // Label-less form is the same as C.
+
+    // break:    without label only inside loops, with valid in any code block.
+    // continue: with or without label only inside loops.
+
+      var total = 0;
+      for (var i = 0; i < 3; i++) {
+        if (i == 1)
+          continue
+        total += i
+      }
+      assert_eq(total, 2)
+
+    // TODO understand label form. Good examples: http://www.tutorialspoint.com/javascript/javascript_loop_control.htm
+
+  // #switch
+
+    var case1 = false
+    switch(1) {
+      case 0:
+        assert(false)
+      break;
+      case 1:
+        case1 = true
+      break;
+      case 2:
+        assert(false)
+      break;
     }
-
-    if (true) {
-    } else {
-      assert(false)
-    }
-
-  // Like Python, some objects are converted to true, others to false.
-
-  // Only the following are false:
-
-    if (0) {
-      assert(false)
-    } else {
-    }
-
-    if ("") {
-      assert(false)
-    } else {
-    }
-
-    if (null) {
-      assert(false)
-    } else {
-    }
-
-    if (undefined) {
-      assert(false)
-    } else {
-    }
-
-    if (NaN) {
-      assert(false)
-    } else {
-    }
-
-  // All others are true.
-
-    if (-1) {
-    } else {
-      assert(false)
-    }
-
-    if (1) {
-    } else {
-      assert(false)
-    }
-
-    if ("a") {
-    } else {
-      assert(false)
-    }
-
-    if ([]) {
-    } else {
-      assert(false)
-    }
-
-// #for
-
-  // C like:
-
-    var total = 0
-    for (var i = 0; i < 3; i++) {
-      total += i
-    }
-    assert_eq(total, 3)
-
-  // For in: iterates over **enumerable object properties**!
-
-    var total = 0
-    var obj = {'a': 1, 'b': 2}
-    for (var x in obj) {
-      total += obj[x]
-    }
-    assert_eq(total, 3)
-
-  // Includes the prototype chain!
-
-    var total = 0
-    var obj = Object.create({parent: 1})
-    for (var x in obj) {
-      total += obj[x]
-    }
-    assert_eq(total, 1)
-
-// #continue
-
-// #break
-
-  // Both have a label and label-less form.
-
-  // Label-less form is the same as C.
-
-  // break:    without label only inside loops, with valid in any code block.
-  // continue: with or without label only inside loops.
-
-    var total = 0;
-    for (var i = 0; i < 3; i++) {
-      if (i == 1)
-        continue
-      total += i
-    }
-    assert_eq(total, 2)
-
-  // TODO understand label form. Good examples: http://www.tutorialspoint.com/javascript/javascript_loop_control.htm
+    assert(case1)
 
 // #Primitive types
 
@@ -813,7 +856,7 @@
     a.b = 1
     assert_eq(a.b, undefined)
 
-  //#==
+  // #==
 
     // http://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3
 
@@ -831,7 +874,7 @@
       assert(true  !== 1)
       assert(true  !== 2)
 
-  //#===
+  // #===
 
     // Operators behave as expected on primitives. In particular,
     // `===` compares their values, not addresses, so for primitives it works as naively expected:
@@ -844,6 +887,30 @@
 
       assert([] !== [])
       assert({} !== {})
+
+  // #Wrappers
+
+  // #Primitive wrappers
+
+    // Each primitive has a wrapper except undefined and null has a wrapper object.
+
+    // Google style says never use them, and that is sound advice.
+    // http://stackoverflow.com/questions/6877149/javascript-style-dont-use-wrapper-objects-for-primitive-types
+
+    // They can be differentiated with typeof:
+
+      assert_eq(typeof(''), 'string')
+      assert_eq(typeof(new String('')), 'object')
+
+    // Good reason not to use: all objects are truthy:
+
+      assert(new Boolean(false))
+      assert(!(new Boolean(false)).valueOf())
+
+    // Good reason not to use 2: all objects different:
+
+      assert(new Int(1) != new Int(1))
+      assert((new Int(1)).valueOf() == (new Int(1).valueOf()))
 
 // #undefined
 
@@ -860,7 +927,7 @@
 
     assert_eq({}.no_yet_defined, undefined)
 
-  //#Check if variable is undefined
+  // #Check if variable is undefined
 
     // Before ES5, it was possible to redefine `undefined` TODO check, in ES5?
     // so the safest way to check for undefined is via `typeof`:
@@ -900,7 +967,8 @@
 
   // Both `'` and `"` are identical, except for escaping themselves.
 
-  // Google style says prefer `'` since it makes it easier to embed HTML, whose attributes use double quotes `"`.
+  // Google style says prefer `'` since it makes it easier to embed HTML,
+  // whose attributes use double quotes `"`.
 
     var s = "abc"
     var s = 'abc'
@@ -912,13 +980,20 @@
 
   // #compare
 
-    // Strings are immutable, therefore comparison works as expected:
+    // Beware of primitive vs object differences.
+    // http://stackoverflow.com/questions/3586775/javascript-string-equality-whats-the-correct-way
 
-      assert_eq('a', 'a')
+    // Code preventively, and expect silly APIs to return objects :-)
+
+      assert('a' == 'a')
+      assert(new String('a') != new String('a'))
+
+      // TODO why?
+      assert('a' == new String('a'))
 
   // #multiline string literals
 
-    //#without newlines inserted
+    // #without newlines inserted
 
       // http://stackoverflow.com/questions/805107/creating-multiline-strings-in-javascript
 
@@ -958,19 +1033,23 @@
 
       assert_eq('a'.concat('b').concat('c'), 'abc')
 
-  // #lower #upper
+  // #lower
+
+  // #upper
 
       assert_eq('ab'.toUpperCase(), 'AB')
       assert_eq('AB'.toLowerCase(), 'ab')
 
-  // #new String vs #String
+  // #new String
+
+  // #String
 
     // Explicit constructor is also available.
 
     // Unlike for Array which is an object, `String()` and `new String()` do different things:
     // `new Strings` generates an object wrapper, while `String()` generates the primitive.
 
-    // There is almost never reason to use `new String()`
+    // There is almost never reason to use `new String()`.
 
       assert('' === String())
       assert('' !== new String())
@@ -1008,7 +1087,22 @@
 
       // No built-in solution: http://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
 
-// #dict #map #class
+  // #startsWith
+
+    // ES6. ES5, use `slice` or `lastIndexOf`:
+    // http://stackoverflow.com/questions/646628/how-to-check-if-a-string-startswith-another-string
+
+  // #slice
+
+  // #substring
+
+      // http://stackoverflow.com/questions/2243824/what-is-the-difference-between-string-slice-and-string-substring
+
+// #dict
+
+// #map
+
+// #class
 
   // Everything except the few primitives types are objects.
 
@@ -1024,7 +1118,11 @@
     // - http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/
     // - http://stackoverflow.com/questions/572897/how-does-javascript-prototype-work
 
-  // #property #[] #.
+  // #property
+
+  // #[]
+
+  // #.
 
     // Attributes can be accessed either via `.` or `[]`.
 
@@ -1054,7 +1152,9 @@
       // 3) If not found, look at [[Prototype]].[[Prototype]] attributes, and so on, until `null` if found.
       //     In that case, return `undefined`.
 
-  // #Object #Object.create
+  // #Object
+
+  // #Object.create
 
     // Low level object operations.
 
@@ -1125,72 +1225,19 @@
 
       assert_eq(o.z, undefined)
 
-  // #prototype #[[Prototype]]
+  // #prototype
 
-    // Exists to allow inheritance-like constructs.
-    //
-    // There are two *distinct* things called prototype:
-    //
-    // - a public `prototype` attribute, as in `[].prototype`.
-    //
-    // - an inaccessible one, called an "Object Internal Property and Methods" on section 8.6.2 of ES5,
-    //     and denoted [[Prototype]] in the standard. Firefox makes this property visible through `__proto__`,
-    //     but this is not mentioned in the standard.
-    //
-    //     This is the one used for the property lookup.
-    //
-    // The relationship between them is:
-    // when an object is constructed, the object's `[[Prototype]]` is set to `obj.prototype`.
+  // #[[Prototype]]
+
+  // #__proto__
+
+    // The best that I can explain it:
+    // http://stackoverflow.com/questions/572897/how-does-javascript-prototype-work/23877420#23877420
 
     // When you do:
 
       var F = function() {}
       var f = new F()
-
-    // You get:
-
-      /*
-      (Function)       (  F  )                                      (f)
-      |                | | ^                                        |
-      |                | | |                                        |
-      |                | | +-------------------------+              |
-      |                | |                           |              |
-      |                | +--------------+            |              |
-      |                |                |            |              |
-      |                |                |            |              |
-      |[[Prototype]]   |[[Prototype]]   |prototype   |constructor   |[[Prototype]]
-      |                |                |            |              |
-      |                |                |            |              |
-      |                |                | +----------+              |
-      |                |                | |                         |
-      | ---------------+                | | +-----------------------+
-      | |                               | | |
-      v v                               v | v
-      (Function.prototype)              (F.prototype)
-      |                                 |
-      |                                 |
-      |[[Prototype]]                    |[[Prototype]]
-      |                                 |
-      |                                 |
-      | +-------------------------------+
-      | |
-      v v
-      (Object.prototype)
-      | | ^
-      | | |
-      | | +---------------------------+
-      | |                             |
-      | +--------------+              |
-      |                |              |
-      |                |              |
-      |[[Prototype]]   |constructor   |prototype
-      |                |              |
-      |                |              |
-      |                | -------------+
-      |                | |
-      v                v |
-      (null)           (Object)
-      */
 
     // The chain ends at:
 
@@ -1393,7 +1440,7 @@
       assert_eq(o2.x, 2)
       assert_eq(o.x,  1)
 
-    //#new C vs new C()
+    // #new C vs new C()
 
       // They are the same: parenthesis an be omitted in this special case
       // where there are no arguments.
@@ -1402,7 +1449,7 @@
         assert_eq((new C).constructor, C)
         assert_eq((new C()).constructor, C)
 
-    //#return value for constructor
+    // #return value for constructor
 
       // What the constructor can return:
       // http://stackoverflow.com/questions/1978049/what-values-can-a-constructor-return-to-avoid-returning-this
@@ -1429,7 +1476,9 @@
         assert_eq((new C()).a, 1)
 
 
-  // #object oriented patterns #classic object patterns
+  // #object oriented patterns
+
+  // #classic object patterns
 
     // Before going into this, you must understand how dot `.` resolves properties.
 
@@ -1538,6 +1587,8 @@
 
   // #delete operator
 
+    // Yes, it is an operator which has an alphanumeric keyword..
+
     // Remove from dict:
 
       var obj = {0:1}
@@ -1547,6 +1598,11 @@
 
     // On global scope: depends is variable or property of the global object:
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete#Examples
+
+  // #Operator overload
+
+    // Nope: http://stackoverflow.com/questions/1634341/overloading-arithmetic-operators-in-javascript
+
 </script>
 
   <h3>#callable object</h3>
@@ -1646,7 +1702,9 @@
     assert_eq(maybe_return(true),  0)
     assert_eq(maybe_return(false), undefined)
 
-  // #redefine function. ##`function f() vs var f = function()`
+  // #redefine function.
+
+  // #function f() vs var f = function()
 
     // http://stackoverflow.com/questions/336859/var-functionname-function-vs-function-functionname
 
@@ -1674,7 +1732,7 @@
       var f = function() {}
       assert_eq(f.name,  '')
 
-  // #default positional arguments
+  // #Default positional arguments
 
     // Default positional arguments don't exist, but can be emulated using undefined check:
 
@@ -1996,7 +2054,7 @@
         // CoffeScript has a dedicated language feature to make binding super easy:
         // fat arrow `=>` function definitions.
 
-    //#this and jQuery
+    // #this and jQuery
 
       // jQuery automatically sets `this` to useful things: its not default ES5 behavior.
 
@@ -2192,28 +2250,9 @@
         assert_eq(counter.increment(), 5)
         assert_eq(counter.i, undefined)
 
-// #= #assignment operator
+// #array
 
-  // Variables contain address of data.
-  // `=` always takes the address of the data on the right and sets it to the variable on the left.
-  // Integers like `0` and `1` *do* have a single (because immutable) address in JavaScript.
-
-    var a = 0
-    var b = a
-    b = 1
-    assert_eq(a, 0)
-
-    var a = [0]
-    var b = a
-    b[0] = 1
-    assert_eq(a[0], 1)
-
-    var a = [[0]]
-    var b = a
-    b[0][0] = 1
-    assert_eq(a[0][0], 1)
-
-// #array #[]
+// #[]
 
     var a = [0, 'a']
     assert_eq(a.length, 2)
@@ -2223,7 +2262,7 @@
   // Access last element: just do `a[a.length - 1]`
   // http://stackoverflow.com/questions/3216013/get-the-last-item-in-an-array
 
-  //#Arrays are hash objects
+  // #Arrays are hash objects
 
     // http://stackoverflow.com/questions/6445010/what-is-a-javascript-array
     //
@@ -2263,7 +2302,7 @@
 
   // A good library based workaround is Uderscore.js's isEqual.
 
-  //#Array explicit constructor
+  // #Array explicit constructor
 
     // `new Array` vs `Array`: unlike `new String` vs `String`, they are identical
     // http://stackoverflow.com/questions/8205691/coffeescript-array-vs-new-array
@@ -2290,7 +2329,9 @@
       //  assert_eq(Array, 1)
       //}())
 
-  // #push #append
+  // #push
+
+  // #append
 
     var a = [0, 1]
     a.push(2)
@@ -2319,7 +2360,7 @@
 
   // #iterate
 
-  //# forEach
+  // #forEach
 
     // For in iterates all properties of an object, so it does *not* work!
 
@@ -2349,9 +2390,13 @@
       var a = [1, 2, 0]
       a.sort()
 
-// #exception #try #catch #finally
+// #exception
 
-  // try catch finally
+// #try
+
+// #catch
+
+// #finally
 
   // No `else`, use a variable instead:
   // http://stackoverflow.com/questions/4872170/javascript-try-catch-else-finally-like-python-java-ruby-etc
@@ -2366,7 +2411,7 @@
     }
     assert_eq(a, 1)
 
-  //#Error
+  // #Error
 
     // Anything can be thrown, but the Error is a good ES base class to throw,
     // as it shows a stack trace it it explodes, while things like strings don't.
@@ -2414,6 +2459,13 @@
   </script>
   <script>
     document.write('<p>Current UTC datetime: ' + (new Date()).toISOString() + '</p>')
+  </script>
+
+<h2>#Math</h2>
+
+  <script>
+    assert_eq(Math.abs(-2), 2)
+    assert_eq(Math.floor(1.6), 1)
   </script>
 
 <h2>#JSON</h2>
@@ -2611,7 +2663,7 @@
       )
     </script>
 
-    <p>Asynchronous:</p>
+    <p>It is asynchronous:</p>
     <script>
       (function() {
         var x = 0
@@ -2624,6 +2676,11 @@
         x = 1
       }())
     </script>
+
+    <p>
+      Synchronous sleep: impossible, do a busy wait loop that waits for a setTimeout control variable.
+      <a href="http://stackoverflow.com/questions/951021/what-do-i-do-if-i-want-a-javascript-version-of-sleep">http://stackoverflow.com/questions/951021/what-do-i-do-if-i-want-a-javascript-version-of-sleep</a>
+    </p>
 
   <h3>#open</h3>
 
@@ -4349,9 +4406,15 @@
 
 <h2>#Web Audio API</h2>
 
+  <p><a href="http://www.w3.org/TR/webaudio/">http://www.w3.org/TR/webaudio/</a></p>
   <p>Advanced audio control.</p>
   <p>W3C spec.</p>
   <p>Tutorial: <a href="http://www.html5rocks.com/en/tutorials/webaudio/intro/">http://www.html5rocks.com/en/tutorials/webaudio/intro/</a></p>
+
+<h2>#Web speech API</h2>
+
+  <p><a href="https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html">https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html</a></p>
+  <p><a href="https://www.google.com/intl/en/chrome/demos/speech.html">https://www.google.com/intl/en/chrome/demos/speech.html</a></p>
 
 <h2>#WebGL</h2>
 
@@ -4425,8 +4488,22 @@
   <p><a href="http://caniuse.com/#feat=eventsource">http://caniuse.com/#feat=eventsource</a></p>
   <p><a href="http://en.wikipedia.org/wiki/Push_technology#HTTP_server_push">http://en.wikipedia.org/wiki/Push_technology#HTTP_server_push</a>/p>
   <p><a href="http://en.wikipedia.org/wiki/Server-sent_events">http://en.wikipedia.org/wiki/Server-sent_events</a></p>
+  <p><a href="http://stackoverflow.com/questions/19995/is-there-some-way-to-push-data-from-web-server-to-browser">http://stackoverflow.com/questions/19995/is-there-some-way-to-push-data-from-web-server-to-browser</a></p>
+  <p><a href="http://stackoverflow.com/questions/5195452/websockets-vs-server-sent-events-eventsource">http://stackoverflow.com/questions/5195452/websockets-vs-server-sent-events-eventsource</a></p>
   <p><a href="http://stackoverflow.com/questions/12352341/server-send-push-notification-to-client-browser-without-using-polling">http://stackoverflow.com/questions/12352341/server-send-push-notification-to-client-browser-without-using-polling</a></p>
   <p><a href="http://stackoverflow.com/questions/1964494/how-to-make-all-connected-browsers-reload-initiated-by-a-server-side-event">http://stackoverflow.com/questions/1964494/how-to-make-all-connected-browsers-reload-initiated-by-a-server-side-event</a></p>
+  <p></p>
+
+<h2>#Web Workers</h2>
+
+<h2>#Multithreading</h2>
+
+  <p>Added with the Web Workers API.</p>
+  <p>
+    Even callbacks run on a single thread: you don't have to worry about synchronization.
+    Callbacks exist to overcome the huge networking IO delays of web development.
+  </p>
+  <p><a href="http://stackoverflow.com/questions/39879/why-doesnt-javascript-support-multithreading">http://stackoverflow.com/questions/39879/why-doesnt-javascript-support-multithreading</a></p>
 
 <h2>#Extensions</h2>
 
