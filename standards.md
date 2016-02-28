@@ -67,6 +67,4 @@ W3C tries to keep in touch, e.g. HTML5 has on WHATWG editor.
 
 Internet Engineering Task Force.
 
-Specifies mainly networking protocols, in particular HTTP, which is used at many points of W3C documentation, so will not be covered here.
-
-For an HTTP tutorial see: <https://github.com/cirosantilli/net/http.md>
+IETF standards are not covered here, since they are "lower level networking stuff". See instead: <https://github.com/cirosantilli/net> This includes in particular HTTP.
