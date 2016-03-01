@@ -1189,7 +1189,7 @@ b</code></pre>
     <p>Include another HTML document in the current one.</p>
     <p>
       This element therefore automatically makes an HTTP request to another page,
-      so it is an interesting way go include HTML content without any Javascript.
+      so it is an interesting way go include HTML content without any JavaScript.
     </p>
     <p>In the past, before server side scripting, widely used to reuse code fragments such as indexes.
     <p>Now generally frowned upon for navigation.</p>
@@ -1210,6 +1210,11 @@ b</code></pre>
       (Firefox 27 shows the not found page with a reload button.)
     </p>
     <div><iframe src="i-do-no-exist.html">i-do-not-exist.html failed to load</iframe></div>
+
+    <h4>#JavaScript inside iframe</h4>
+
+      <div><iframe src="alert-click.html"></iframe></div>
+      <div><iframe src="alert-svg-click.html"></iframe></div>
 
   <h3>#object</h3>
 
@@ -1326,11 +1331,17 @@ b</code></pre>
         <circle onclick="circle_click(evt)" cx="300" cy="225" r="200" fill="red"/>
       </svg>
 
-      <p>Click for Js <code>object</code>:</p>
+      <p>Click for Js inside <code>object</code>:</p>
       <object type="image/svg+xml" data="svg-script.svg" class="border" style="height:200px; width:200px;"></object>
 
-      <p>Click for Js <code>img</code>:</p>
+      <p>Click for Js inside <code>img</code>:</p>
       <img src="svg-script.svg" alt="svg" class="border" style="height:200px; width:200px;"/>
+
+      <p>External JavaScript:</p>
+      <ul>
+        <li>Example: <a href="svg-external-js.svg">svg-external-js.svg</a></li>
+        <li><a href="http://stackoverflow.com/questions/1797203/how-to-load-an-external-javascript-script-to-pure-svg-document">http://stackoverflow.com/questions/1797203/how-to-load-an-external-javascript-script-to-pure-svg-document</a></li>
+      </ul>
 
     <h4>XML vulnerabilities</h4>
 
