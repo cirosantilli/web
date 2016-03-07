@@ -78,3 +78,7 @@ You can configure:
 - <https://support.mozilla.org/en-US/questions/981405?fpa=1>
 
 Argg, so easy in Chrome: <http://www.howtogeek.com/100999/how-to-use-multiple-profiles-in-google-chrome-like-a-ninja/>
+
+## Open tab next to old one
+
+- https://support.mozilla.org/en-US/questions/1053542?fpa=1 Tab Mix Plus?
