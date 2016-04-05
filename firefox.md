@@ -82,3 +82,8 @@ Argg, so easy in Chrome: <http://www.howtogeek.com/100999/how-to-use-multiple-pr
 ## Open tab next to old one
 
 - https://support.mozilla.org/en-US/questions/1053542?fpa=1 Tab Mix Plus?
+
+## Show tabs vertically
+
+- <https://addons.mozilla.org/en-US/firefox/addon/tree-style-tab/> (annoying because it changes a lot of behaviours)
+- <https://addons.mozilla.org/en-US/firefox/addon/vertical-tabs/> (broken on 45)
