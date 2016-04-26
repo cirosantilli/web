@@ -1,6 +1,5 @@
 ---
 title: Standards
-permalink: web/standards/
 ---
 
 {{ site.toc }}
