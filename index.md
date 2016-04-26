@@ -5,10 +5,11 @@ title: Web Cheat
 HTML, CSS, JavaScript and related technologies.
 
 1.  Featured
-    1. [HTML](html.html)
-    1. [CSS](css.html)
-    1. [JavaScript](js.html)
-    1. [XHTML](xhtml.xhtml)
+    1.  [HTML](html.html)
+    1.  [CSS](css.html)
+    1.  [JavaScript](js.html)
+        1. [redirect-js](redirect-js.html)
+    1.  [XHTML](xhtml.xhtml)
 1.  [Standards](standards/)
 1.  [ACE](ace.html)
 1.  [PDF.js](pdfjs.html)
