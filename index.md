@@ -9,6 +9,7 @@ HTML, CSS, JavaScript and related technologies.
     1.  [CSS](css.html)
     1.  [JavaScript](js.html)
         1. [redirect-js](redirect-js.html)
+        1. [dispatchEvent](dispatch-event.html)
     1.  [XHTML](xhtml.xhtml)
 1.  [Standards](standards/)
 1.  [ACE](ace.html)
@@ -23,6 +24,8 @@ HTML, CSS, JavaScript and related technologies.
     1. [Firefox](firefox)
     1. [Chrome](chrome)
     1. [w3m](w3m)
+1.  JavaScript browser frameworks
+    1. [React](react.md)
 1.  [Bibliography](bibliography)
 
 Related repositories:

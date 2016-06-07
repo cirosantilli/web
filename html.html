@@ -492,6 +492,8 @@ This seems not to be possible because of the cross site request:
     It is still likely to render correctly on all browsers.
     You can also cheat this by referencing a custom !DOCTYPE declaration, but this is really overkill.
     HTML allows you to use any attribute prefixed by <code>data-</code>. Great addition!
+    There is even JavaScript support with <code>dataset</code>:
+    <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_data_attributes#JavaScript_Access">https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_data_attributes#JavaScript_Access</a>
   </p>
   <p>
     Each element can have a specific set of attributes:
@@ -662,9 +664,9 @@ This seems not to be possible because of the cross site request:
       <code>http-equiv</code>, <code>itemprop</code>, <code>name</code>, <code>property</code>.
     </p>
 
-    <h4>#name</h4>
+    <h4>#name attribute of meta tags</h4>
 
-    <h4>#content</h4>
+    <h4>#content attribute of meta tags</h4>
 
       <p>
         <code>meta</code> can be used to define a key value dictionary,
@@ -826,12 +828,10 @@ This seems not to be possible because of the cross site request:
   <h3>#section</h3>
 
     <p><a href="http://www.w3.org/TR/html5/sections.html#the-section-element">http://www.w3.org/TR/html5/sections.html#the-section-element</a></p>
-
     <p>
       Usually a child of <code>article</code> or <code>main</code>,
       that contains a heading. Usually there are multiple sibling sections.
     </p>
-
     <p>Usually a sibling of <code>header</code>.</p>
 
   <h3>#nav</h3>
@@ -848,12 +848,10 @@ This seems not to be possible because of the cross site request:
       Can be inside any <code>article</code> or <code>main</code> or <code>body</code>,
       so there can be multiple per document.
     </p>
-
     <p>
       Can contain <code>h1</code>, <code>nav</code> and summaries,
       although those elements can also be placed outside.
     </p>
-
     <p>Usually a sibling of <code>section</code>.</p>
 
   <h3>#h1</h3>
@@ -1236,6 +1234,11 @@ b</code></pre>
 
     <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed</a></p>
     <p>Standardized in HTML5, but had wide incompatible supports before.</p>
+
+  <h3>#template</h3>
+
+    <p><a href="http://stackoverflow.com/questions/494143/creating-a-new-dom-element-from-an-html-string-using-built-in-dom-methods-or-pro">http://stackoverflow.com/questions/494143/creating-a-new-dom-element-from-an-html-string-using-built-in-dom-methods-or-pro</a></p>
+    <p>TODO: whatever is inside it does not show: a<template>b</template>c</p>
 
   <h3>#MathML</h3>
 
@@ -1711,17 +1714,61 @@ b</code></pre>
       submitting a form is to redirect to somewhere else.
     </p>
 
-  <h3>#name attribute</h3>
+    <h4>#name attribute of form elements</h4>
 
-    <p>For most form elements, gives the name of the parameter that will be sent on th request.</p>
+      <p>
+        Useless historical artifact?
+        <a href="http://stackoverflow.com/questions/8946320/whats-the-point-of-html-forms-name-attribute">http://stackoverflow.com/questions/8946320/whats-the-point-of-html-forms-name-attribute</a>
+        <a href="http://stackoverflow.com/questions/11111670/is-it-ok-to-have-multiple-html-forms-with-the-same-name">http://stackoverflow.com/questions/11111670/is-it-ok-to-have-multiple-html-forms-with-the-same-name</a>
+      </p>
+
+    <h4>#action attribute of form elements</h4>
+
+      <p>
+        If missing or empty, send form to current page:
+        <a href="http://stackoverflow.com/questions/1131781/is-it-a-good-practice-to-use-an-empty-url-for-a-html-forms-action-attribute-a">http://stackoverflow.com/questions/1131781/is-it-a-good-practice-to-use-an-empty-url-for-a-html-forms-action-attribute-a</a>
+      </p>
+
+  <h3>#name attribute of input elements</h3>
+
+    <p>For most form elements, gives the name of the parameter that will be sent on the request.</p>
     <p>If missing:</p>
     <ul>
       <li>the HTML is still valid</li>
       <li>the value is not submitted</li>
     </ul>
+    <p><a href="http://stackoverflow.com/questions/12543848/does-form-data-still-transfer-if-the-input-tag-has-no-name">http://stackoverflow.com/questions/12543848/does-form-data-still-transfer-if-the-input-tag-has-no-name</a></p>
+    <p>Such an input could still be used by JavaScript.</p>
     <form action="#name" class="border" id="name" method="get">
       <input type="text" name="name" value="has name"/>
       <input type="text"             value="no name" />
+      <button type="submit">Submit</button>
+    </form>
+    <p>
+        There are two magic values: <code>isindex</code> and <code>_charset_</code>:
+        <a href="https://www.w3.org/TR/html5/forms.html#naming-form-controls:-the-name-attribute">https://www.w3.org/TR/html5/forms.html#naming-form-controls:-the-name-attribute</a>
+    </p>
+
+    <h4>#isindex</h4>
+
+      <p>
+        If the first text field has name <code>isindex</code>, the value is sent just as <code>?value</code>
+        instead of <code>?isindex=value</code>.
+      </p>
+      <form action="#isindex" class="border" id="isindex" method="get">
+        <input type="text" name="isindex" value="default value"/>
+        <input type="text" name="asdf" value="qwer"/>
+        <button type="submit">Submit</button>
+      </form>
+
+  <h3>#value attribute of input elements</h3>
+
+    <p>TODO: if missing HTML is valid but input is ignored on submit, like <code>name</code>?</p>
+    <form action="#novalue" class="border" id="novalue" method="get">
+      <label>
+        Checkbox without value:
+        <input type="checkbox" name="a" />
+      </label>
       <button type="submit">Submit</button>
     </form>
 
@@ -1813,7 +1860,7 @@ b</code></pre>
 
     <p><code>type</code>: should always be specified to avoid browser inconsistencies:</p>
     <ul>
-      <li>button:	nothing special about it. Mostly used with Javascript.</li>
+      <li>button:	nothing special about it. Mostly used with JavaScript.</li>
       <li>
         submit: do the enclosing form's <code>action</code>.
         Default value if the type attribute is missing.
@@ -1860,10 +1907,11 @@ b</code></pre>
   <h3>#input</h3>
 
     <p>It is valid HTLM5 to omit the type attribute, but a bad practice due to browser inconsistencies.</p>
+    <p>TODO default is text?</p>
 
     <h4>#text</h4>
 
-      <p>value="default": initial content in the text field: <input type="text" value="default"/></p>
+      <p><code>value="default":</code> initial content in the text field: <input type="text" value="default"/></p>
       <p>size="3" <input type="text" size="3"/></p>
       <p>size="5" <input type="text" size="5"/></p>
       <p>placeholder="asdf": text that shows when the field is empty: <input type="text" size="5" placeholder="asdf"/></p>
@@ -1873,7 +1921,7 @@ b</code></pre>
 
       <p>The value sent is:</p>
       <ul>
-        <li>if checked: the <code>name=value</code> pair</li>
+        <li>if checked: the <code>name=value</code> pair, and <code>name=on</code> if there is no value attribute</li>
         <li>otherwise: nothing is sent</li>
       </ul>
       <form action="#checkbox" id="checkbox" method="get">
@@ -1883,6 +1931,10 @@ b</code></pre>
         </label>
         <button type="submit">Submit</button>
       </form>
+      <p>
+        TODO: can you not send the value since it is useless?
+        <a href="http://stackoverflow.com/questions/4557387/is-a-url-query-parameter-valid-if-it-has-no-value">http://stackoverflow.com/questions/4557387/is-a-url-query-parameter-valid-if-it-has-no-value</a>
+      </p>
 
       <h5>#checked</h5>
 
@@ -1895,7 +1947,7 @@ b</code></pre>
         <p>Resetting a form resets the dirty flag.</p>
         <p>
           The conclusion is simple: only use this attribute to set the initial value of the checkbox:
-          never modify it with Javascript. Use the <code>checked</code> property instead.
+          never modify it with JavaScript. Use the <code>checked</code> property instead.
         </p>
         <p>
           Contrast this complex behavior with that of the <code>disabled</code> attribute,
@@ -1971,6 +2023,10 @@ b</code></pre>
         <input type="button" value="type=button"/>
         <input type="submit" value="type=submit"/>
       </form>
+      <p>
+        Multiple submit buttons on the same form:
+        <a href="http://stackoverflow.com/questions/547821/two-submit-buttons-in-one-form">http://stackoverflow.com/questions/547821/two-submit-buttons-in-one-form</a>
+      </p>
 
     <h4>#datalist</h4>
 
@@ -2073,14 +2129,23 @@ iii</textarea></p>
         <a href="http://caniuse.com/#feat=input-file-multiple">http://caniuse.com/#feat=input-file-multiple</a>
         So as of 2014 it is better to use libraries for that.
       </p>
-      <p>Currently only valid for file and email.</p>
+      <p>
+        Currently only valid for file and email.
+        The <code>select</code> element also supports it.
+      </p>
       <p>
         Multiple files, control select multiple files in the popup and submits.
         Data is sent as: <code>file=path1&amp;file=path2</code>.
       </p>
+      <p>
+        Multiple emails show as a single text field, but it forces the user to enter
+        comma + space separated email addresses. Works because emails cannot contain commas.
+      </p>
+      <p>Values are sent as repeated keys with different values.</p>
       <p>Boolean attribute.</p>
       <form action="#file-multiple" id="file-multiple" method="get">
-        <input type="file" name="file" multiple="multiple"/>
+        <input type="file" name="file" multiple="multiple"/><br/>
+        <input type="email" name="email" multiple="multiple"/>
         <button type="submit">Submit</button>
       </form>
 
@@ -2136,6 +2201,24 @@ iii</textarea></p>
       </select>
       <button type="submit">Submit</button>
     </form>
+
+    <h4>#multiple attribute of the select tag</h4>
+
+      <p>Shift for click for ranges, Ctrl click for unions.</p>
+      <p>Data is sent as this were multiple inputs with the same name.</p>
+      <p>Similar to multiple checkboxes with the same name, but:</p>
+      <ul>
+        <li>you only need to specify the name once</li>
+        <li>shift range selection is possible</li>
+      </ul>
+      <form action="#select" id="select">
+        <select multiple="multiple" name="select-name">
+          <option value="a" selected="selected">a</option>
+          <option value="b" selected="selected">b</option>
+          <option value="c">c</option>
+        </select>
+        <button type="submit">Submit</button>
+      </form>
 
     <h4>#optgroup</h4>
 

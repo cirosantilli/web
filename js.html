@@ -687,7 +687,7 @@
         assert(false)
       }
 
-    // Like Python, some objects are converted to true, others to false.
+    // Like Python, some objects are converted to true (truthy), others to false (falsy).
 
     // Only the following are false:
 
@@ -1196,12 +1196,25 @@
           //set:
         })
 
+    // #Get a subset of attribute key value pairs to a new object
+
+      // http://stackoverflow.com/questions/17781472/how-to-get-a-subset-of-a-javascript-objects-properties
+
     // #enumerable
 
       // Only enumerable properties show up in `for in`.
 
       // useful to ignore "internals" like `constructor` and other properties:
       // http://stackoverflow.com/questions/17893718/what-does-enumerable-mean
+
+    // #copy
+
+    // #assign
+
+      // http://stackoverflow.com/a/30042948/895245
+
+      // Update (like Python map) one object with another:
+      // http://stackoverflow.com/questions/171251/how-can-i-merge-properties-of-two-javascript-objects-dynamically
 
     // Exact same as above: defaults writeable, enumerable and configurable to true.
 
@@ -1865,6 +1878,13 @@
       //x = 42;         // creates the property x on the global object
       //var y = 43;     // declares a new variable, y
 
+  // #let
+
+    // ES6.
+    // Block scope, more C-like:
+    // - http://stackoverflow.com/questions/762011/let-keyword-vs-var-keyword
+    // - http://programmers.stackexchange.com/questions/274342/is-there-any-reason-to-use-the-var-keyword-in-es6
+
   // #arguments
 
     // Any number of arguments can be passed to a function.
@@ -2515,6 +2535,23 @@
     <a href="https://github.com/jakearchibald/es6-promise">https://github.com/jakearchibald/es6-promise</a>
   </p>
 
+<h2>#Global object</h2>
+
+  <p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-global-object">http://www.ecma-international.org/ecma-262/6.0/#sec-global-object</a></p>
+
+  <h3>#encodeURIComponent</h3>
+
+    <script>
+      assert_eq(encodeURIComponent('a'), 'a')
+      assert_eq(encodeURIComponent('&'), '%26')
+      assert_eq(encodeURIComponent('%'), '%25')
+    </script>
+
+    <p>
+      Encode entire object at once: no built-in:
+      <a href="http://stackoverflow.com/questions/1714786/querystring-encoding-of-a-javascript-object">http://stackoverflow.com/questions/1714786/querystring-encoding-of-a-javascript-object</a>
+    </p>
+
 <h2>#window</h2>
 
   <p>
@@ -2909,6 +2946,10 @@
       <div></div>
       <script>previousElement().insertAdjacentHTML('beforeEnd', document.referrer)</script>
 
+    <h4>#forms</h4>
+
+      <p><code>HTMLCollection</code> of all form elements. TODO: why for forms only?</p>
+
 <h2>#DOM</h2>
 
   <p>Interface to interact with both HTML and XML elements from a tree point of view.</p>
@@ -3073,6 +3114,7 @@
       <script>
         document.write('<div id="getElementById">getElementByid</div>')
         assert_eq(document.getElementById('getElementById').innerHTML, 'getElementByid')
+        assert_eq(document.getElementById('notAnId'), null)
       </script>
 
     <h4>#getElementsByClassName</h4>
@@ -3113,10 +3155,29 @@
     <p><a href="http://www.w3.org/TR/dom/#element">http://www.w3.org/TR/dom/#element</a></p>
     <p>Inherits <code>Node</code>.</p>
 
+    <h4>#matches</h4>
+
+      <p>Check if the element matches a selector.</p>
+      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/matches">https://developer.mozilla.org/en-US/docs/Web/API/Element/matches</a></p>
+
+    <h4>#classList</h4>
+
+      <p>List of classes of element.</p>
+
+    <h4>#form</h4>
+
+      <p>Form element for a given <code>input</code> element.</p>
+      <p><a href="http://stackoverflow.com/questions/991367/how-to-get-the-form-parent-of-an-input">http://stackoverflow.com/questions/991367/how-to-get-the-form-parent-of-an-input</a></p>
+
   <h3>#HTMLElement object</h3>
 
     <p><a href="http://www.w3.org/TR/html5/dom.html#htmlelement">http://www.w3.org/TR/html5/dom.html#htmlelement</a></p>
     <p>Extends element.</p>
+
+    <h4>#dataset</h4>
+
+      <p><code>DOMStringMap</code> with the <code>data-*</code> attributes of the element.</p>
+      <p>Automatically converts keys to camel case.</p>
 
   <h3>#outerHTML</h3>
 
@@ -3209,12 +3270,15 @@
 
       <p>
         Does not exist, but easily defined with <code>insertBefore</code>.
-        http://stackoverflow.com/questions/4793604/how-to-do-insert-after-in-javascript-without-using-a-library
+        <a href="http://stackoverflow.com/questions/4793604/how-to-do-insert-after-in-javascript-without-using-a-library">http://stackoverflow.com/questions/4793604/how-to-do-insert-after-in-javascript-without-using-a-library</a>
       </p>
 
     <h4>#removeChild</h4>
 
-      <p>Must get parent first: http://stackoverflow.com/questions/3387427/javascript-remove-element-by-id</p>
+      <p>
+        Must get parent first:
+        <a href="http://stackoverflow.com/questions/3387427/javascript-remove-element-by-id">http://stackoverflow.com/questions/3387427/javascript-remove-element-by-id</a>
+      </p>
       <script>
         //var element = document.getElementById("element-id");
         //element.parentNode.removeChild(element);
@@ -3230,6 +3294,7 @@
     <script>
       assert_eq(strToElement('<p id="getAttribute"></p>').getAttribute('id'), 'getAttribute')
     </script>
+    <p>If the attribute does not exist, return <code>null</code>.</p>
 
   <h3>#Style</h3>
 
@@ -3490,35 +3555,19 @@
 
     <h4>#useCapture parameter</h4>
 
-    <h4>#Capture vs #Bubble</h4>
+    <h4>#Capture</ha>
 
-      <p>Determines the order in which listeners listen to the event.</p>
-      <p>TODO exactly how, example</p>
-      <p>A listener callback ends, the event is then sent to further listeners by default.</p>
+    <ha>#Bubble</h4>
+
+      <p>Very good example: <a href="http://stackoverflow.com/a/4616720/895245">http://stackoverflow.com/a/4616720/895245</a></p>
 
     <h4>#stopPropagation</h4>
 
       <p>
         Prevent event from being listened on further listeners.
-        http://stackoverflow.com/questions/4470417/how-do-i-consume-a-key-event-in-javascript-so-that-it-doesnt-propagate
+        <a href="http://stackoverflow.com/questions/4470417/how-do-i-consume-a-key-event-in-javascript-so-that-it-doesnt-propagate">http://stackoverflow.com/questions/4470417/how-do-i-consume-a-key-event-in-javascript-so-that-it-doesnt-propagate</a>
       </p>
       <p>Only implemented in recent IE. Consider jQuery's <code>preventDefault</code> and/or <code>stopPropagation</code> if you care.</p>
-      <p>TODO example</p>
-
-    <h4>#dispatchEvent</h4>
-
-    <h4>#Trigger events programmatically</h4>
-
-      <p>
-        Programmatically trigger events.
-        http://stackoverflow.com/questions/2490825/how-to-trigger-event-in-javascript
-      </p>
-      <p>TODO example</p>
-      <p>
-        TODO not possible to trigger standard events like click?
-        http://stackoverflow.com/questions/809057/how-do-i-programmatically-click-on-an-element-in-firefox
-      </p>
-      <div id="dispatchEvent"></div>
 
   <h3>document vs window vs body events</h3>
 
@@ -3526,7 +3575,6 @@
       <code>document</code>, <code>window</code> and <code>body</code> have different possible events.
       TODO understand clearly.
       <a href="http://stackoverflow.com/questions/12045440/difference-between-document-addeventlistener-and-window-addeventlistener">http://stackoverflow.com/questions/12045440/difference-between-document-addeventlistener-and-window-addeventlistener</a>
-      <a href="http://stackoverflow.com/questions/191157/window-onload-vs-body-onload">http://stackoverflow.com/questions/191157/window-onload-vs-body-onload</a>
     </p>
     <p>
       You cannot attach events to the <code>body</code> element form scripts in the head,
@@ -3549,6 +3597,11 @@
         )
       }())
     </script>
+
+    <h4>#window.onload</h4>
+
+        <p><a href="http://stackoverflow.com/questions/191157/window-onload-vs-body-onload">http://stackoverflow.com/questions/191157/window-onload-vs-body-onload</a></p>
+        <p><a href="http://stackoverflow.com/questions/2638292/after-travelling-back-in-firefox-history-javascript-wont-run">http://stackoverflow.com/questions/2638292/after-travelling-back-in-firefox-history-javascript-wont-run</a></p>
 
   <h3>Useful events</h3>
 
@@ -3599,7 +3652,7 @@
       </p>
       <p>
         Both window and document objects have this event:
-        http://stackoverflow.com/questions/588040/window-onload-vs-document-onload>
+        <a href="http://stackoverflow.com/questions/588040/window-onload-vs-document-onload>">http://stackoverflow.com/questions/588040/window-onload-vs-document-onload></a>
         but <code>document</code>'s is probably more useful.
       </p>
       <p>
@@ -3849,8 +3902,9 @@
   </p>
   <p>Each browser stores its own cookies</p>
 
-  <h3>Cookies in HTTP.</h3>
-  <h3>Cookies without JavaScript.</h3>
+  <h3>Cookies in HTTP</h3>
+
+  <h3>Cookies without JavaScript</h3>
 
     <p>Cookies can also be set via headers using the <code>Set-Cookie</code> header key.</p>
     <p>Cookies are automatically sent to servers by browsers via the <code>Cookie</code> header value.</p>
@@ -3920,7 +3974,9 @@
 
     // #Get values
 
-      // Not possible directly: must parse the `document.cookie` string.
+      // Not possible directly: must parse the `document.cookie` string!
+      // - http://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript
+      // - http://stackoverflow.com/questions/10730362/get-cookie-by-name
 
     // #Delete values
 
@@ -4022,6 +4078,7 @@
   <p>Make server requests without reloading the current page.</p>
   <p>
     W3C WD: <a href="http://www.w3.org/TR/XMLHttpRequest/">http://www.w3.org/TR/XMLHttpRequest/</a>,
+    WHATWG spec: <a href="https://xhr.spec.whatwg.org/">https://xhr.spec.whatwg.org/</a>
     widely implemented.
   </p>
   <p>The name is only historical and currently horrible, as this object can:</p>
@@ -4077,6 +4134,26 @@
     }
   </script>
   <p>TODO: is <code>Content-Length</code> required?</p>
+  <p>
+    There is no JSON response, you have to parse the text:
+    <a href="http://stackoverflow.com/questions/1973140/parsing-json-from-xmlhttprequest-responsejson">http://stackoverflow.com/questions/1973140/parsing-json-from-xmlhttprequest-responsejson</a>
+  </p>
+
+    <h4>#X-Requested-With</h4>
+
+      <p>Non-standard like most <code>X-</code> prefixed headers: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers</a></p>
+      <p>
+        Can be used to check if the request was made with a form or not.
+        jQuery sends it by default, and frameworks like Django check it by default:
+        <a href="https://docs.djangoproject.com/en/1.9/ref/request-response/#django.http.HttpRequest.is_ajax">https://docs.djangoproject.com/en/1.9/ref/request-response/#django.http.HttpRequest.is_ajax</a>
+      </p>
+      <p><a href="http://stackoverflow.com/questions/17478731/whats-the-point-of-the-x-requested-with-header">http://stackoverflow.com/questions/17478731/whats-the-point-of-the-x-requested-with-header</a></p>
+      <p><a href="http://stackoverflow.com/questions/3315914/is-an-x-requested-with-header-server-check-sufficient-to-protect-against-a-csrf">http://stackoverflow.com/questions/3315914/is-an-x-requested-with-header-server-check-sufficient-to-protect-against-a-csrf</a></p>
+      <p><a href="http://security.stackexchange.com/questions/23371/csrf-protection-with-custom-headers-and-without-validating-token">http://security.stackexchange.com/questions/23371/csrf-protection-with-custom-headers-and-without-validating-token</a></p>
+
+    <h4>#setRequestHeader</h4>
+
+        <p></p>
 
   <h3>#open</h3>
 
@@ -4534,6 +4611,10 @@
     </p>
 
 <h2>#Third party</h2>
+
+  <h3>#Web development</h3>
+
+    <p>2016: <a href="https://medium.com/javascript-and-opinions/state-of-the-art-javascript-in-2016-ab67fc68eb0b#.u26i6mwa3">https://medium.com/javascript-and-opinions/state-of-the-art-javascript-in-2016-ab67fc68eb0b#.u26i6mwa3</a></p>
 
   <h3>#cdnjs</h3>
 
