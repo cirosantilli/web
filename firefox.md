@@ -28,6 +28,12 @@ Development:
 
 -   <http://stackoverflow.com/questions/13158083/take-a-full-page-screenshot-with-firefox>
 
+## Settings from the CLI
+
+Permanent: <http://askubuntu.com/questions/313483/how-do-i-change-firefoxs-aboutconfig-from-a-shell-script>
+
+Single session: <http://superuser.com/questions/699136/how-can-one-change-a-firefox-config-setting-from-the-cli>
+
 ## Preferences
 
 Restore old linear search engines interface: <https://support.mozilla.org/en-US/questions/1033968> on `about:config` set `browser.search.showOneOffButtons` to `False`
