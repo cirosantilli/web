@@ -27,6 +27,17 @@ function assert_eq(actual, expect) {
   }
 }
 
+function assert_array_eq(actual, expect) {
+  if (
+    ! (
+      actual.length === expect.length &&
+      actual.every(function(v,i) { return v === expect[i] })
+    )
+  ) {
+    report_error_eq(actual, expect)
+  }
+}
+
 function assert_neq(actual, expect) {
   if (actual === expect) {
     report_error_eq(actual, expect)

@@ -376,6 +376,7 @@
     </p>
 
     <p>Turn on for entire script element:</p>
+    <!-- TODO not working in Firefox 48. Syntax breaks and scripts stops running
     <script>
       'use strict'
       assert_throws(
@@ -385,8 +386,10 @@
         SyntaxError
       )
     </script>
+    -->
 
     <p>Turn on for single function:</p>
+    <!-- TODO not working in Firefox 48. Syntax breaks and scripts stops running
     <script>
       assert_throws(
         function() {
@@ -411,6 +414,7 @@
         }
       )
     </script>
+    -->
 
 <h2>#semicolon</h2>
 
@@ -910,8 +914,8 @@
 
     // Good reason not to use 2: all objects different:
 
-      assert(new Int(1) != new Int(1))
-      assert((new Int(1)).valueOf() == (new Int(1).valueOf()))
+      assert(new Number(1) != new Number(1))
+      assert((new Number(1)).valueOf() == (new Number(1).valueOf()))
 
 // #undefined
 
@@ -1574,7 +1578,11 @@
         var d2 = {a:20, d:3}
         //assert_eq(d0.extend(d1, d2), {a:20, b:1, c:2, d:3})
 
-  // #iterate dict #loop dict #for in
+  // #iterate dict
+
+  // #loop dict\
+
+  // #for in
 
     // Only enumerable keys are looped over:
 
@@ -1598,6 +1606,15 @@
       assert_eq(keys[0], 'a')
       assert_eq(keys[1], 'b')
       assert_eq(keys.length, 2)
+
+  // #for of
+
+      var a = [1, 2, 3]
+      var b = []
+      for (var x of a) {
+        b.push(x)
+      }
+      assert_array_eq(b, [1, 2, 3])
 
   // #delete operator
 
@@ -1690,8 +1707,8 @@
   <p>
     ES6 draft: <a href="http://wiki.ecmascript.org/doku.php?id=harmony:const">http://wiki.ecmascript.org/doku.php?id=harmony:const</a>
   </p>
-  <p>Simply prevent update: don't even raise an error.</p>
   <p>Better to also stick to the convention of <code>CAPS_UNDERSCORE</code> for constants.</p>
+  <!-- Some versions of Firefox don't even raise an error. Firefox 48 does.
   <script>
     ;(function () {
       const c = 0
@@ -1699,6 +1716,7 @@
       assert_eq(c, 0)
     }())
   </script>
+  -->
 
 <script>
 // TODO: convert comments on this script to HTML
@@ -2319,7 +2337,8 @@
 
     assert_neq([], [])
 
-  // There is no short built-in way of comparing them: http://stackoverflow.com/questions/7837456/comparing-two-arrays-in-javascript
+  // There is no short built-in way of comparing them:
+  // http://stackoverflow.com/questions/7837456/comparing-two-arrays-in-javascript
 
   // A good library based workaround is Uderscore.js's isEqual.
 
@@ -3036,6 +3055,7 @@
         assert_eq(node.nodeName, 'DIV')
         assert_eq(node.tagName, 'DIV')
 
+        // TODO deprecated Firefox 48.
         node = e.getAttributeNode('class')
         assert_eq(node.nodeType, 2)
         assert_eq(node.nodeName, 'class')
