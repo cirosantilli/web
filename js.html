@@ -1578,6 +1578,60 @@
         var d2 = {a:20, d:3}
         //assert_eq(d0.extend(d1, d2), {a:20, b:1, c:2, d:3})
 
+  // #class
+
+    // ES6. Syntax sugar for prototype madness.
+    // http://stackoverflow.com/a/23877420/895245
+
+        ;(function(){
+            class C {
+                constructor(i) {
+                    this.i = i
+                }
+                inc() {
+                    return this.i + 1
+                }
+            }
+
+            class D extends C {
+                constructor(i) {
+                    super(i)
+                }
+                inc2() {
+                    return this.i + 2
+                }
+            }
+
+            assert_eq((new C(1)).inc(), 2)
+            assert_eq((new D(1)).inc(), 2)
+            assert_eq((new D(1)).inc2(), 3)
+
+            // "Classes" are just function objects.
+            assert_eq(C.constructor, Function)
+            assert_eq(C.__proto__, Function.prototype)
+            assert_eq(D.constructor, Function)
+            // D is a function "indirectly" through the chain.
+            assert_eq(D.__proto__, C)
+            assert_eq(D.__proto__.__proto__, Function.prototype)
+
+            // "extends" sets up the prototype chain so that base class
+            // lookups will work as expected
+            var d = new D(1)
+            assert_eq(d.__proto__, D.prototype)
+            assert_eq(D.prototype.__proto__, C.prototype)
+            assert_eq(d.__proto__.__proto__.inc, C.prototype.inc)
+
+            // Class variables
+            // No ES6 syntax sugar apparently:
+            // http://stackoverflow.com/questions/22528967/es6-class-variable-alternatives
+            C.c = 1
+            assert_eq(C.c, 1)
+            // Because `D.__proto__ === C`.
+            assert_eq(D.c, 1)
+            // Nothing makes this work.
+            assert_eq(d.c, undefined)
+        })()
+
   // #iterate dict
 
   // #loop dict\
