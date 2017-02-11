@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title></title>
+    <title>JSON</title>
     <style>
         div {
             border: 1px solid black;
@@ -12,13 +12,10 @@
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
     <script>
-        d3.text("csv.csv", function(text) {
-            var data = d3.csv.parseRows(text, function(d) {
-                return d.map(Number);
-            });
+        d3.json("json.json", function(data) {
             d3.select("body")
                 .selectAll("div")
-                .data(data)
+                .data(data["a"])
                 .enter().append("div")
                 .style("width", function(d) { return (d * 10).toString() + "px"; })
                 .text(function(d) { return d; });

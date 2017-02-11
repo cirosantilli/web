@@ -10,6 +10,7 @@ HTML, CSS, JavaScript and related technologies.
     1.  [JavaScript](js.html)
         1. [redirect-js](redirect-js.html)
         1. [dispatchEvent](dispatch-event.html)
+        1. [URL change mouse wheel](url-change-mouse-wheel.html)
     1.  [XHTML](xhtml.xhtml)
 1.  [Standards](standards/)
 1.  Browsers
