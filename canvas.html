@@ -7,12 +7,18 @@
 </head>
 <body>
     <p>This looks like a good example: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations">https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations</a></p>
+    <div>fps: <span id="fps"></span> (granule: <span id="fps-granule"></span>)</div>
     <canvas id="my-canvas" width="512" height="512" style="border:1px solid black;"></canvas>
     <script>
 var canvas = document.getElementById("my-canvas");
 var ctx = canvas.getContext("2d");
 var pixel_size = 1;
 var t = 0;
+var fps_span = document.getElementById("fps");
+var fps_last_date = new Date();
+var fps_granule = 5;
+var fps_granule_span = document.getElementById("fps-granule");
+fps_granule_span.innerHTML = fps_granule;
 
 /* We need this to fix t because toBlob calls are asynchronous. */
 function createBlobFunc(t) {
@@ -40,6 +46,11 @@ function draw() {
     // https://stackoverflow.com/questions/19235286/convert-html5-canvas-sequence-to-a-video-file/57153718#57153718
     // canvas.toBlob(createBlobFunc(t));
     t++;
+    if (t % fps_granule == 0) {
+        var fps_date = new Date();
+        fps_span.innerHTML = (1000.0 * fps_granule / (fps_date - fps_last_date)).toFixed(2);
+        fps_last_date = fps_date;
+    }
     window.requestAnimationFrame(draw);
 }
 window.requestAnimationFrame(draw);
