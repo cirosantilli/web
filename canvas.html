@@ -8,25 +8,36 @@
 <body>
     <p>This looks like a good example: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations">https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations</a></p>
     <div>enable: <input type="checkbox" id="enable" checked></input></div>
-    <div>save images: <input type="checkbox" id="save-images-checkbox"></input></div>
-    <div>fps granule: <input type="text" id="fps-granule" value="5"></input></div>
+    <div>canvas width: <input type="number" min="10" id="canvas-width-input" value="128"></input> (very large will make the browser tab hang)</div>
+    <div>save images: <input type="checkbox" id="save-images-checkbox"></input> (some images are skipped if FPS is high)</div>
+    <div>FPS limit: <input type="number" min="10" id="fps-limit" value=""></input></div>
+    <div>FPS granule: <input type="number" min="10" id="fps-granule" value="5"></input></div>
     <div>total frames: <span id="total_frames"></span></div>
-    <div>fps: <span id="fps"></span></div>
-    <canvas id="my-canvas" width="512" height="512" style="border:1px solid black;"></canvas>
+    <div>FPS: <span id="fps"></span></div>
+    <canvas id="my-canvas" style="border:1px solid black;"></canvas>
     <script>
-var canvas = document.getElementById("my-canvas");
-var ctx = canvas.getContext("2d");
+var canvas = document.getElementById('my-canvas');
+var ctx = canvas.getContext('2d');
 var pixel_size = 1;
 var t = 0;
-var fps_span = document.getElementById("fps");
+var fps_span = document.getElementById('fps');
 var fps_last_date = new Date();
-var fps_granule_input = document.getElementById("fps-granule");
-var save_images_checkbox = document.getElementById("save-images-checkbox");
-var enable_checkbox = document.getElementById("enable");
-enable_checkbox.addEventListener('change', drawIfEnabled)
-var total_frames_span = document.getElementById("total_frames");
+var fps_granule_input = document.getElementById('fps-granule');
+var canvas_width_input = document.getElementById('canvas-width-input');
+// https://stackoverflow.com/questions/19764018/controlling-fps-with-requestanimationframe
+var save_images_checkbox = document.getElementById('save-images-checkbox');
+var total_frames_span = document.getElementById('total_frames');
 total_frames_span.innerHTML = t.toString();
 
+/* FPS limit. */
+var fps_limit_input = document.getElementById('fps-limit');
+var fps_limit_last_render = Date.now();
+var now, fps_limit_then, fps_limit_elapsed;
+fps_limit_then = Date.now();
+
+/* Enable disable. */
+var enable_checkbox = document.getElementById('enable');
+enable_checkbox.addEventListener('change', drawIfEnabled)
 function drawIfEnabled() {
     if (enable_checkbox.checked) {
         window.requestAnimationFrame(draw);
@@ -36,42 +47,62 @@ function drawIfEnabled() {
 /* We need this to fix t because toBlob calls are asynchronous. */
 function createBlobFunc(t) {
   return function(blob) {
-    saveAs(blob, t.toString() + '.png');
+    // FileSaver.js
+    saveAs(blob, 'canvas-' + t.toString() + '.png');
   };
 }
 
 function draw() {
-    console.log("draw");
-    for (x = 0; x < canvas.width; x += pixel_size) {
-        for (y = 0; y < canvas.height; y += pixel_size) {
-            var b = ((1.0 + Math.sin(t * Math.PI / 16)) / 2.0);
-            ctx.fillStyle =
-                "rgba(" +
-                (x / canvas.width) * 255 + "," +
-                (y / canvas.height) * 255 + "," +
-                b * 255 +
-                ",255)"
-            ;
-            ctx.fillRect(x, y, pixel_size, pixel_size);
+    drawIfEnabled();
+    var fps_limit = parseFloat(fps_limit_input.value);
+    if (!isNaN(fps_limit)) {
+        var fps_limit_time_millis = 1000.0 / fps_limit;
+        now = Date.now();
+        fps_limit_elapsed = now - fps_limit_then;
+    }
+    if (isNaN(fps_limit) || (fps_limit_elapsed > fps_limit_time_millis)) {
+        if (!isNaN(fps_limit)) {
+            fps_limit_then = now - (fps_limit_elapsed % fps_limit_time_millis);
+        }
+        var canvas_width = parseInt(canvas_width_input.value);
+        if (isNaN(canvas_width)) {
+            canvas_width = parseInt(canvas_width_input.getAttribute('value'))
+        }
+        canvas.width = canvas_width;
+        canvas.height = canvas_width;
+
+        // The actual drawing.
+        for (x = 0; x < canvas.width; x += pixel_size) {
+            for (y = 0; y < canvas.height; y += pixel_size) {
+                var b = ((1.0 + Math.sin(t * Math.PI / 16)) / 2.0);
+                ctx.fillStyle =
+                    'rgba(' +
+                    (x / canvas.width) * 255 + ',' +
+                    (y / canvas.height) * 255 + ',' +
+                    b * 255 +
+                    ',255)'
+                ;
+                ctx.fillRect(x, y, pixel_size, pixel_size);
+            }
+        }
+
+        // Save the images to files.
+        // https://stackoverflow.com/questions/19235286/convert-html5-canvas-sequence-to-a-video-file/57153718#57153718
+        if (save_images_checkbox.checked) {
+            canvas.toBlob(createBlobFunc(t));
+        }
+        t++;
+        total_frames_span.innerHTML = t.toString();
+        fps_limit_last_render = Date.now();
+
+        /* FPS calculation. */
+        var fps_granule = parseInt(fps_granule_input.value);
+        if (t % fps_granule == 0) {
+            var fps_date = Date.now();
+            fps_span.innerHTML = (1000.0 * fps_granule / (fps_date - fps_last_date)).toFixed(2);
+            fps_last_date = fps_date;
         }
     }
-    // Save the images to files.
-    // https://stackoverflow.com/questions/19235286/convert-html5-canvas-sequence-to-a-video-file/57153718#57153718
-    if (save_images_checkbox.checked) {
-        canvas.toBlob(createBlobFunc(t));
-    }
-    t++;
-    total_frames_span.innerHTML = t.toString();
-    var fps_granule = parseInt(fps_granule_input.value);
-    if (t % fps_granule == 0) {
-        var fps_date = new Date();
-        fps_span.innerHTML = (1000.0 * fps_granule / (fps_date - fps_last_date)).toFixed(2);
-        fps_last_date = fps_date;
-    }
-    if (enable_checkbox.checked) {
-        window.requestAnimationFrame(draw);
-    }
-    drawIfEnabled()
 }
 drawIfEnabled()
     </script>
