@@ -15,7 +15,7 @@ HTML, CSS, JavaScript and related technologies.
         1.  [dispatchEvent](dispatch-event.html)
         1.  [URL change mouse wheel](url-change-mouse-wheel.html)
     1.  [XHTML](xhtml.xhtml)
-1.  [Standards](standards/)
+1.  [Standards](standards)
 1.  Browsers
     1.  [Firefox](firefox)
     1.  [Chrome](chrome)
@@ -23,9 +23,9 @@ HTML, CSS, JavaScript and related technologies.
 1.  JavaScript Libraries
     1.  [ACE](ace.html)
     1.  [Bootstrap](bootstrap.html)
-    1.  [Bower](bower/)
-    1.  [Browserify](browserify/)
-    1.  [D3](d3/)
+    1.  [Bower](bower)
+    1.  [Browserify](browserify)
+    1.  [D3](d3)
     1.  [Marked](marked.html)
     1.  [PDF.js](pdfjs.html)
     1.  [jQuery](jquery.html)
