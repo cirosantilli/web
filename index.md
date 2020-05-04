@@ -6,8 +6,6 @@ HTML, CSS, JavaScript and related technologies.
 
 1.  Featured
     1.  [HTML](html.html)
-        1.  [min](min.html)
-        1.  [min-sane](min-sane.html)
         1.  [img](img.html)
     1.  [CSS](css.html)
     1.  [JavaScript](js.html)
